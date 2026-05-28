@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Hosts — Communion Breads</title>
+  <meta name="description" content="Bread to anchor a gathering. Bundles built for hosts — Sunday dinners, dinner parties, holiday spreads. Pre-ordered together, baked fresh on your date." />
+  <meta name="theme-color" content="#4A3728" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9E%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { beige:'#F5F0E8', cream:'#FAF7F2', brown:'#4A3728', 'brown-soft':'#6B5340', swedish:'#2A5C8A', 'swedish-soft':'#4A7CAA', crust:'#B98655' },
+      fontFamily: { display:['Fraunces','Georgia','serif'], body:['Inter','system-ui','sans-serif'] },
+      boxShadow: { soft:'0 10px 40px -15px rgba(74, 55, 40, 0.25)' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="font-body bg-cream text-brown antialiased">
+
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-cream/90 backdrop-blur-md border-b border-beige">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between" aria-label="Primary">
+      <a href="index.html" class="group block leading-none">
+        <span class="font-display text-[22px] md:text-[26px] text-brown group-hover:text-swedish transition-colors tracking-tight block">Communion Breads</span>
+        <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-brown-soft/70 mt-1.5 block">by Soren Deorlow</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-10 text-[13px] tracking-wide">
+        <li><a href="index.html"   class="nav-link">Home</a></li>
+        <li><a href="about.html"   class="nav-link">About</a></li>
+        <li><a href="loaves.html"  class="nav-link">Breads</a></li>
+        <li><a href="process.html" class="nav-link">The Process</a></li>
+        <li><a href="order.html"   class="ml-3 px-5 py-2.5 rounded-full bg-brown text-cream hover:bg-swedish transition-colors text-[13px] tracking-wide">Order</a></li>
+      </ul>
+      <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-beige bg-cream">
+      <ul class="px-6 py-4 space-y-1 text-base">
+        <li><a href="index.html"   class="block py-3 border-b border-beige">Home</a></li>
+        <li><a href="about.html"   class="block py-3 border-b border-beige">About</a></li>
+        <li><a href="loaves.html"  class="block py-3 border-b border-beige">Breads</a></li>
+        <li><a href="process.html" class="block py-3 border-b border-beige">The Process</a></li>
+        <li><a href="order.html"   class="block py-3 text-swedish font-semibold">Order →</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="pt-32 md:pt-40 pb-12 md:pb-16 bg-beige">
+      <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+        <span class="text-xs font-medium tracking-[0.22em] uppercase text-swedish">Vid Bordet · At the Table</span>
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl mt-5 leading-[1.02]">For your gatherings.</h1>
+        <p class="mt-6 text-brown-soft text-lg max-w-2xl mx-auto">Bread is the easiest thing to ruin at a dinner party — and the easiest to forget. We make that part disappear. Pre-order a bundle, pick it up the morning of, set it on the table still warm enough to break by hand.</p>
+
+        <!-- Ramp-up notice -->
+        <div class="mt-10 max-w-2xl mx-auto bg-cream border border-beige rounded-2xl px-6 py-5 flex items-start gap-4 text-left">
+          <span class="flex-shrink-0 inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.22em] uppercase px-3 py-1.5 rounded-full mt-0.5">Heads Up</span>
+          <p class="text-sm text-brown-soft leading-relaxed">We're currently baking Country Levain only as we ramp up the line. Bundles return when Seeded Multigrain, Nordic Rye, and Spelt &amp; Honey are back. <a href="order.html" class="text-swedish font-medium hover:underline">Reserve a Country Levain</a> in the meantime, or <a href="mailto:hello@sorenssourdough.com" class="text-swedish font-medium hover:underline">email us</a> to be notified when bundles open.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUNDLES -->
+    <section class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-6 lg:px-10">
+        <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+
+          <!-- Sunday Dinner -->
+          <article class="bg-beige rounded-2xl overflow-hidden flex flex-col">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="assets/images/featured/country-levain.jpg" alt="A round Country Levain — the everyday loaf for a Sunday table" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="p-7 md:p-8 flex flex-col flex-1">
+              <span class="text-[11px] font-medium tracking-[0.22em] uppercase text-crust mb-3">Bundle · 01</span>
+              <h2 class="font-display text-3xl mb-3 leading-tight">The Sunday Dinner</h2>
+              <p class="text-brown-soft text-sm leading-relaxed mb-5">A round table, a slow roast, a quiet evening. The everyday Country Levain plus a darker counterpoint for whoever wants more.</p>
+              <ul class="text-sm text-brown-soft space-y-1.5 mb-6">
+                <li class="flex gap-2"><span class="text-crust">·</span> 1 full Country Levain</li>
+                <li class="flex gap-2"><span class="text-crust">·</span> 1 half Nordic Rye</li>
+                <li class="flex gap-2"><span class="text-crust">·</span> Serves 4–6</li>
+              </ul>
+              <div class="mt-auto flex items-baseline justify-between border-t border-cream pt-4">
+                <span class="font-display text-3xl">$24</span>
+                <a href="order.html?bundle=sunday" class="text-sm font-medium text-swedish hover:underline">Reserve →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Dinner Party -->
+          <article class="bg-beige rounded-2xl overflow-hidden flex flex-col">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="assets/images/featured/multigrain.jpg" alt="A pair of finished loaves, ready for a party-sized table" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="p-7 md:p-8 flex flex-col flex-1">
+              <span class="text-[11px] font-medium tracking-[0.22em] uppercase text-crust mb-3">Bundle · 02</span>
+              <h2 class="font-display text-3xl mb-3 leading-tight">The Dinner Party</h2>
+              <p class="text-brown-soft text-sm leading-relaxed mb-5">For tables of six to ten. Variety on the cutting board, conversation everywhere else. Pick the two full loaves you want.</p>
+              <ul class="text-sm text-brown-soft space-y-1.5 mb-6">
+                <li class="flex gap-2"><span class="text-crust">·</span> 2 full loaves (your choice)</li>
+                <li class="flex gap-2"><span class="text-crust">·</span> 1 half loaf (our pick)</li>
+                <li class="flex gap-2"><span class="text-crust">·</span> Serves 8–12</li>
+              </ul>
+              <div class="mt-auto flex items-baseline justify-between border-t border-cream pt-4">
+                <span class="font-display text-3xl">$42</span>
+                <a href="order.html?bundle=party" class="text-sm font-medium text-swedish hover:underline">Reserve →</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Holiday Spread -->
+          <article class="bg-beige rounded-2xl overflow-hidden flex flex-col">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src="assets/images/instagram/ig-4.jpg" alt="A trio of loaves on a cutting board — a holiday-scale spread" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="p-7 md:p-8 flex flex-col flex-1">
+              <span class="text-[11px] font-medium tracking-[0.22em] uppercase text-crust mb-3">Bundle · 03</span>
+              <h2 class="font-display text-3xl mb-3 leading-tight">The Holiday Spread</h2>
+              <p class="text-brown-soft text-sm leading-relaxed mb-5">Christmas, Easter, Thanksgiving, Midsummer. One loaf for each kind of guest — the bread eater, the seed lover, the rye traditionalist.</p>
+              <ul class="text-sm text-brown-soft space-y-1.5 mb-6">
+                <li class="flex gap-2"><span class="text-crust">·</span> Country Levain (full)</li>
+                <li class="flex gap-2"><span class="text-crust">·</span> Nordic Rye (full)</li>
+                <li class="flex gap-2"><span class="text-crust">·</span> Spelt &amp; Honey (full)</li>
+                <li class="flex gap-2"><span class="text-crust">·</span> 1 half loaf (your choice)</li>
+                <li class="flex gap-2"><span class="text-crust">·</span> Serves 14–20</li>
+              </ul>
+              <div class="mt-auto flex items-baseline justify-between border-t border-cream pt-4">
+                <span class="font-display text-3xl">$62</span>
+                <a href="order.html?bundle=holiday" class="text-sm font-medium text-swedish hover:underline">Reserve →</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBSCRIPTION -->
+    <section class="py-16 md:py-24 bg-brown text-cream">
+      <div class="max-w-6xl mx-auto px-6 lg:px-10 grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <span class="text-xs font-medium tracking-[0.22em] uppercase text-crust">Vecka för Vecka · Week by Week</span>
+          <h2 class="font-display text-4xl md:text-5xl mt-5 mb-6 leading-[1.05]">A Saturday loaf,<br/>every Saturday.</h2>
+          <div class="space-y-5 text-cream/85 leading-relaxed">
+            <p>The weekly bread share. One loaf, picked up every Saturday between three and six. You choose the variety. Switch any week. Skip any week. Cancel any time.</p>
+            <p>Most of our hosts started here — one loaf a week as the default, plus a bundle when the calendar fills up.</p>
+          </div>
+          <div class="mt-9 inline-flex items-baseline gap-4 bg-cream/5 rounded-2xl px-6 py-5 border border-cream/10">
+            <span class="font-display text-4xl text-cream">$15</span>
+            <span class="text-sm text-cream/70">/ week · full loaf</span>
+          </div>
+          <div class="mt-9">
+            <a href="order.html?subscribe=weekly" class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-cream text-brown font-medium hover:bg-crust hover:text-cream transition-colors">
+              Start a weekly share
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-soft">
+          <img src="assets/images/hero.jpg" alt="A finished loaf — the kind of Saturday bread that becomes a household rhythm" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="py-16 md:py-24">
+      <div class="max-w-5xl mx-auto px-6 lg:px-10">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-xs font-medium tracking-[0.22em] uppercase text-swedish">How a Host Bundle Works</span>
+          <h2 class="font-display text-4xl md:text-5xl mt-4 leading-tight">Three steps. No second-guessing.</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <div class="font-display text-5xl text-crust mb-4">01</div>
+            <h3 class="font-display text-xl mb-2">Pick your bundle</h3>
+            <p class="text-brown-soft text-sm leading-relaxed">Sunday Dinner, Dinner Party, Holiday Spread — or build your own from the order page.</p>
+          </div>
+          <div>
+            <div class="font-display text-5xl text-crust mb-4">02</div>
+            <h3 class="font-display text-xl mb-2">Tell us when</h3>
+            <p class="text-brown-soft text-sm leading-relaxed">At least 48 hours out. We start your levain the night before your pickup day.</p>
+          </div>
+          <div>
+            <div class="font-display text-5xl text-crust mb-4">03</div>
+            <h3 class="font-display text-xl mb-2">Pick up the morning of</h3>
+            <p class="text-brown-soft text-sm leading-relaxed">Tied in raffia, tagged by hand, still warm. Walk it straight to the table.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 md:py-28 bg-beige">
+      <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+        <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Make the bread the easy part.</h2>
+        <p class="text-lg text-brown-soft mb-8 max-w-xl mx-auto">Pick a bundle, pick a date, leave the rest to us.</p>
+        <a href="order.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brown text-cream font-medium hover:bg-swedish transition-colors shadow-soft">
+          Reserve a Bundle
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brown text-cream/80">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-4 gap-10">
+      <div class="md:col-span-2">
+        <div class="leading-none mb-4">
+          <span class="font-display text-2xl text-cream block tracking-tight">Communion Breads</span>
+          <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-cream/50 mt-1.5 block">by Soren Deorlow</span>
+        </div>
+        <p class="text-sm leading-relaxed max-w-sm">Hand-crafted levain sourdough with Swedish pride. Baked fresh in small batches from a home kitchen.</p>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Explore</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html"   class="hover:text-cream transition-colors">About</a></li>
+          <li><a href="loaves.html"  class="hover:text-cream transition-colors">Breads</a></li>
+          <li><a href="hosts.html"    class="hover:text-cream transition-colors">For Hosts</a></li>
+          <li><a href="process.html"  class="hover:text-cream transition-colors">The Process</a></li>
+          <li><a href="blessing.html" class="hover:text-cream transition-colors">The Blessing</a></li>
+          <li><a href="order.html"    class="hover:text-cream transition-colors">Order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Follow</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-cream transition-colors">Instagram</a></li>
+          <li><a href="mailto:hello@sorenssourdough.com" class="hover:text-cream transition-colors">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-cream/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-cream/60">
+        <p>© <span id="year">2026</span> Soren's Sourdough · Baked with pride in a home kitchen.</p>
+        <p>Tack så mycket · Thank you</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-brown text-cream shadow-soft opacity-0 pointer-events-none transition-all duration-300 hover:bg-swedish z-40" aria-label="Back to top">
+    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+  </button>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

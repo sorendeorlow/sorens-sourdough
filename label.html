@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Bread Label — Soren's Sourdough</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --beige:   #F5F0E8;
+      --cream:   #FAF7F2;
+      --brown:   #4A3728;
+      --soft:    #6B5340;
+      --swedish: #2A5C8A;
+      --crust:   #B98655;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--brown);
+      background: var(--beige);
+    }
+
+    .screen-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 64px;
+    }
+
+    .screen-shell header {
+      max-width: 560px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .screen-shell h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 28px;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    .screen-shell p {
+      color: var(--soft);
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .controls button {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+      border: 1px solid var(--brown);
+      background: var(--brown);
+      color: var(--cream);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background .2s, color .2s;
+    }
+    .controls button.ghost {
+      background: transparent;
+      color: var(--brown);
+    }
+    .controls button:hover { background: var(--swedish); border-color: var(--swedish); color: var(--cream); }
+
+    /* ---- The label itself ---- */
+
+    .sheet {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .label {
+      width: 4in;
+      height: 3in;
+      background: var(--cream);
+      color: var(--brown);
+      border: 1px solid #e6dccb;
+      position: relative;
+      padding: 0.28in 0.32in;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr auto;
+      column-gap: 0.22in;
+      row-gap: 0.06in;
+      overflow: hidden;
+    }
+
+    /* twine hole indicator (top-left) */
+    .label::before {
+      content: "";
+      position: absolute;
+      top: 0.22in;
+      left: 0.22in;
+      width: 0.16in;
+      height: 0.16in;
+      border-radius: 50%;
+      border: 1.2px solid var(--brown);
+      background: var(--beige);
+    }
+
+    .label .eyebrow {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      font-family: 'Inter', sans-serif;
+      font-size: 8.5px;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--crust);
+      padding-left: 0.34in; /* clear the hole */
+      margin-bottom: 0.04in;
+    }
+
+    .label .brand {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+      align-self: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      color: var(--brown);
+    }
+    .label .brand .amp {
+      font-style: italic;
+      color: var(--crust);
+    }
+    .label .brand .swirl {
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--crust);
+      margin-top: 8px;
+    }
+
+    .label .madeby {
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+      font-size: 9.5px;
+      line-height: 1.45;
+      color: var(--soft);
+      align-self: end;
+    }
+    .label .madeby strong {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 11px;
+      color: var(--brown);
+      letter-spacing: 0.005em;
+      margin-bottom: 2px;
+    }
+    .label .madeby .tack {
+      display: block;
+      margin-top: 4px;
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--swedish);
+    }
+
+    .label .qr-block {
+      grid-column: 2 / 3;
+      grid-row: 1 / 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .label .qr {
+      width: 1.05in;
+      height: 1.05in;
+      padding: 4px;
+      background: var(--cream);
+      border: 1px solid #e6dccb;
+    }
+    .label .qr img,
+    .label .qr canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+    .label .qr-caption {
+      font-size: 7px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-top: 2px;
+    }
+
+    /* ---- Print ---- */
+    @page {
+      size: letter;
+      margin: 0.5in;
+    }
+
+    @media print {
+      html, body { background: white; }
+      .screen-shell { padding: 0; }
+      .screen-shell header, .controls { display: none; }
+      .sheet {
+        margin: 0;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.25in;
+      }
+      .label {
+        border: 1px dashed #d4c8b3; /* cut guide */
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="screen-shell">
+  <header>
+    <h1>Bread Tag — preview</h1>
+    <p>Four 4×3″ hang-tags per US Letter sheet. Use the round indicator as the twine punch. Print, cut along the dashed guide, punch, and tie.</p>
+    <div class="controls">
+      <button onclick="window.print()">Print sheet</button>
+      <button class="ghost" onclick="document.getElementById('qr-input').focus()">Change QR link</button>
+    </div>
+    <div style="margin-top:16px; font-size:13px; color:var(--soft);">
+      QR target:
+      <input id="qr-input" type="url" value="https://sorendeorlow.github.io/sorens-sourdough/"
+             style="font-family:'Inter',sans-serif;font-size:13px;padding:6px 10px;border:1px solid #d4c8b3;border-radius:2px;min-width:280px;color:var(--brown);background:var(--cream);"
+             onchange="renderAll(this.value)">
+    </div>
+  </header>
+
+  <div class="sheet" id="sheet">
+    <!-- 4 labels -->
+    <div class="label">
+      <div class="eyebrow">Hand-baked · Levain</div>
+      <div class="brand">Soren&rsquo;s<br>Sourdough<span class="swirl"></span></div>
+      <div class="madeby">
+        <strong>Made with care in La Costa Oaks</strong>
+        Swedish craft in every crumb.
+        <span class="tack">Tack så mycket</span>
+      </div>
+      <div class="qr-block">
+        <div class="qr" data-qr></div>
+        <div class="qr-caption">Scan for the bakery</div>
+      </div>
+    </div>
+
+    <div class="label">
+      <div class="eyebrow">Hand-baked · Levain</div>
+      <div class="brand">Soren&rsquo;s<br>Sourdough<span class="swirl"></span></div>
+      <div class="madeby">
+        <strong>Made with care in La Costa Oaks</strong>
+        Swedish craft in every crumb.
+        <span class="tack">Tack så mycket</span>
+      </div>
+      <div class="qr-block">
+        <div class="qr" data-qr></div>
+        <div class="qr-caption">Scan for the bakery</div>
+      </div>
+    </div>
+
+    <div class="label">
+      <div class="eyebrow">Hand-baked · Levain</div>
+      <div class="brand">Soren&rsquo;s<br>Sourdough<span class="swirl"></span></div>
+      <div class="madeby">
+        <strong>Made with care in La Costa Oaks</strong>
+        Swedish craft in every crumb.
+        <span class="tack">Tack så mycket</span>
+      </div>
+      <div class="qr-block">
+        <div class="qr" data-qr></div>
+        <div class="qr-caption">Scan for the bakery</div>
+      </div>
+    </div>
+
+    <div class="label">
+      <div class="eyebrow">Hand-baked · Levain</div>
+      <div class="brand">Soren&rsquo;s<br>Sourdough<span class="swirl"></span></div>
+      <div class="madeby">
+        <strong>Made with care in La Costa Oaks</strong>
+        Swedish craft in every crumb.
+        <span class="tack">Tack så mycket</span>
+      </div>
+      <div class="qr-block">
+        <div class="qr" data-qr></div>
+        <div class="qr-caption">Scan for the bakery</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function renderAll(url) {
+    document.querySelectorAll('[data-qr]').forEach(el => {
+      el.innerHTML = '';
+      new QRCode(el, {
+        text: url,
+        width: 220,
+        height: 220,
+        colorDark: '#4A3728',
+        colorLight: '#FAF7F2',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    });
+  }
+  renderAll(document.getElementById('qr-input').value);
+</script>
+
+</body>
+</html>

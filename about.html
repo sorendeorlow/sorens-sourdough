@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Soren — Soren's Sourdough</title>
+  <meta name="description" content="The story behind Soren's Sourdough — Swedish heritage, a home kitchen, and a deep love for traditional levain bread." />
+  <meta name="theme-color" content="#4A3728" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9E%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { beige:'#F5F0E8', cream:'#FAF7F2', brown:'#4A3728', 'brown-soft':'#6B5340', swedish:'#2A5C8A', 'swedish-soft':'#4A7CAA', crust:'#B98655' },
+      fontFamily: { display:['Fraunces','Georgia','serif'], body:['Inter','system-ui','sans-serif'] },
+      boxShadow: { soft:'0 10px 40px -15px rgba(74, 55, 40, 0.25)' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="font-body bg-cream text-brown antialiased">
+
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-cream/90 backdrop-blur-md border-b border-beige">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between" aria-label="Primary">
+      <a href="index.html" class="group block leading-none">
+        <span class="font-display text-[22px] md:text-[26px] text-brown group-hover:text-swedish transition-colors tracking-tight block">Communion Breads</span>
+        <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-brown-soft/70 mt-1.5 block">by Soren Deorlow</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-10 text-[13px] tracking-wide">
+        <li><a href="index.html"   class="nav-link">Home</a></li>
+        <li><a href="about.html"   class="nav-link nav-active">About</a></li>
+        <li><a href="loaves.html"  class="nav-link">Breads</a></li>
+        <li><a href="process.html" class="nav-link">The Process</a></li>
+        <li><a href="order.html"   class="ml-3 px-5 py-2.5 rounded-full bg-brown text-cream hover:bg-swedish transition-colors text-[13px] tracking-wide">Order</a></li>
+      </ul>
+      <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-beige bg-cream">
+      <ul class="px-6 py-4 space-y-1 text-base">
+        <li><a href="index.html"   class="block py-3 border-b border-beige">Home</a></li>
+        <li><a href="about.html"   class="block py-3 border-b border-beige">About</a></li>
+        <li><a href="loaves.html"  class="block py-3 border-b border-beige">Breads</a></li>
+        <li><a href="process.html" class="block py-3 border-b border-beige">The Process</a></li>
+        <li><a href="order.html"   class="block py-3 text-swedish font-semibold">Order →</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="pt-32 md:pt-40 pb-12 md:pb-16 bg-beige">
+      <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+        <span class="text-xs font-medium tracking-[0.2em] uppercase text-swedish">Vår Historia · Our Story</span>
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl mt-5 leading-[1.05]">The bakery behind the bread</h1>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-6 lg:px-10 grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-soft">
+          <img src="assets/images/family/family.jpg" alt="Soren with Lauren and their two children on the beach — the family behind the bakery" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div>
+          <span class="text-xs font-medium tracking-[0.2em] uppercase text-swedish">Heritage</span>
+          <h2 class="font-display text-4xl md:text-5xl mt-4 mb-6 leading-tight">From Sweden, with patience</h2>
+          <div class="space-y-5 text-brown-soft leading-relaxed">
+            <p>Soren's Sourdough began the way most good things do — slowly, in a home kitchen, with a starter on the counter and the smell of flour in the air.</p>
+            <p>Raised in a Swedish household where bread was a daily ritual, Soren grew up watching levain ferment overnight, rye come out of the oven on cold mornings, and family gather around a sliced loaf with butter and good cheese. That memory is the recipe behind every bake.</p>
+            <p>Today, each loaf is mixed by hand, fermented for a full day-and-a-half, and baked one at a time in a 6-quart cast iron Dutch oven — the same way good bread has been made for centuries.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TILLBAKA TILL SVERIGE ============ -->
+    <section class="py-16 md:py-24 bg-beige">
+      <div class="max-w-6xl mx-auto px-6 lg:px-10">
+
+        <!-- Header + estate hero -->
+        <div class="grid md:grid-cols-12 gap-10 lg:gap-14 items-center mb-12 md:mb-16">
+          <div class="md:col-span-7">
+            <span class="text-xs font-medium tracking-[0.22em] uppercase text-swedish">Tillbaka till Sverige · Back to the Source</span>
+            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl mt-5 mb-8 leading-[1.05]">The trip that wrote the recipe.</h2>
+
+            <div class="space-y-5 text-brown-soft text-lg leading-[1.75]">
+              <p>In the autumn of 2016, Soren and his brother Jensen went back to the town the family comes from — <em class="text-brown not-italic font-medium">Dannäs</em>, a small village in Småland, southern Sweden. A road sign with the family name on it. A family estate still standing under autumn trees.</p>
+              <p>Two weeks of walking ancestral fields, eating meatballs and lingonberries in candlelit pubs, skating outdoors at night under Christmas lights, watching Stockholm reflect itself in the harbor at dusk. Two brothers, no agenda — just listening to what the place still had to say.</p>
+              <p>Most of what's baked today was learned on that trip. Not the technique, which came later from many hands. But the <em class="text-brown not-italic">why</em>.</p>
+            </div>
+          </div>
+
+          <div class="md:col-span-5">
+            <figure>
+              <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-soft bg-cream">
+                <img src="assets/images/sweden/estate.jpg" alt="The Swedish family estate — a yellow manor house under bare autumn trees in Småland" class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <figcaption class="mt-3 text-xs tracking-[0.18em] uppercase text-brown-soft text-center">The family estate · Småland</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <!-- 4-photo strip -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+          <figure class="space-y-3">
+            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-cream">
+              <img src="assets/images/sweden/brothers-at-estate.jpg" alt="Soren and his brother Jensen outside the family estate" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <figcaption class="text-[11px] tracking-[0.12em] uppercase text-brown-soft/80 text-center leading-tight">Outside the estate<br/>with Jensen</figcaption>
+          </figure>
+          <figure class="space-y-3">
+            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-cream">
+              <img src="assets/images/sweden/dannas-brothers.jpg" alt="Soren and his brother Jensen beside the Dannäs town sign — the family's ancestral village" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <figcaption class="text-[11px] tracking-[0.12em] uppercase text-brown-soft/80 text-center leading-tight">Dannäs sign<br/>the family name</figcaption>
+          </figure>
+          <figure class="space-y-3">
+            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-cream">
+              <img src="assets/images/sweden/pub.jpg" alt="The brothers in a candlelit Swedish pub with beers, late evening" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <figcaption class="text-[11px] tracking-[0.12em] uppercase text-brown-soft/80 text-center leading-tight">Candles + öl<br/>somewhere in Småland</figcaption>
+          </figure>
+          <figure class="space-y-3">
+            <div class="aspect-[4/5] rounded-xl overflow-hidden bg-cream">
+              <img src="assets/images/sweden/ice-skating.jpg" alt="Night ice skating in Stockholm with festival lights in the background" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <figcaption class="text-[11px] tracking-[0.12em] uppercase text-brown-soft/80 text-center leading-tight">Skating after dark<br/>Stockholm</figcaption>
+          </figure>
+        </div>
+
+        <p class="mt-10 text-sm tracking-[0.15em] uppercase text-brown-soft/70 text-center">Hösten · Autumn · 2016</p>
+      </div>
+    </section>
+
+    <!-- FAITH + BREAD -->
+    <section class="py-16 md:py-24 bg-brown text-cream">
+      <div class="max-w-6xl mx-auto px-6 lg:px-10 grid md:grid-cols-12 gap-12 lg:gap-16 items-center">
+
+        <div class="md:col-span-7">
+          <span class="text-xs font-medium tracking-[0.22em] uppercase text-crust">Why Communion</span>
+          <h2 class="font-display text-4xl md:text-5xl mt-4 mb-8 leading-[1.1]">Bread is on almost every page.</h2>
+
+          <div class="space-y-5 text-cream/85 text-lg leading-[1.75]">
+            <p>Soren's grandmother baked on Saturdays so the house had bread for Sunday. The smell was theology before he had words for it.</p>
+            <p>Years later, when he found his own faith, he found that bread is everywhere in it — from a stranger named Melchizedek who brought out bread and wine to bless a road-weary Abraham, to a stranger on the road to Emmaus whose face was hidden until he broke the bread. The pattern repeats. A blessing follows.</p>
+            <p>That's why we call them Communion Breads. Not because the bread is sacred in itself, but because the One who took bread, gave thanks, and broke it, made it the sign He chose. Every loaf is a small remembrance of a much bigger meal — and a small offering for the family He's given us.</p>
+          </div>
+
+          <a href="blessing.html" class="inline-flex items-center gap-3 mt-9 text-sm font-medium text-cream group">
+            <span class="border-b border-cream/40 group-hover:border-crust pb-1 transition-colors">Read the full blessing</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+
+        <div class="md:col-span-5">
+          <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-soft">
+            <img src="assets/images/family/soren-kids.jpg" alt="Soren with his two children on a hike — the family the bread is baked for, and from" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section class="py-16 md:py-24 bg-beige">
+      <div class="max-w-6xl mx-auto px-6 lg:px-10">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-xs font-medium tracking-[0.2em] uppercase text-swedish">Our Philosophy</span>
+          <h2 class="font-display text-4xl md:text-5xl mt-4 leading-tight">Quality over quantity</h2>
+          <p class="mt-5 text-brown-soft">Three commitments that shape every loaf we bake.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="bg-cream rounded-2xl p-8">
+            <div class="font-display text-5xl text-crust mb-4">01</div>
+            <h3 class="font-display text-2xl mb-3">Small batches only</h3>
+            <p class="text-brown-soft text-sm leading-relaxed">We never bake more than the kitchen and the day can give proper care to. Every loaf gets full attention.</p>
+          </article>
+          <article class="bg-cream rounded-2xl p-8">
+            <div class="font-display text-5xl text-crust mb-4">02</div>
+            <h3 class="font-display text-2xl mb-3">Traditional levain</h3>
+            <p class="text-brown-soft text-sm leading-relaxed">No commercial yeast. No shortcuts. Just a living starter, time, and good flour doing what they've always done.</p>
+          </article>
+          <article class="bg-cream rounded-2xl p-8">
+            <div class="font-display text-5xl text-crust mb-4">03</div>
+            <h3 class="font-display text-2xl mb-3">Honest ingredients</h3>
+            <p class="text-brown-soft text-sm leading-relaxed">Stone-milled whole grains, filtered water, salt. That's it. Nothing on the label you can't pronounce.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BAKERY ATMOSPHERE -->
+    <section class="py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 grid md:grid-cols-3 gap-4 md:gap-6">
+        <a href="#" class="aspect-square md:aspect-[3/4] md:row-span-2 rounded-2xl overflow-hidden bg-beige group" data-lightbox="The home kitchen counter, floured and ready">
+          <img src="assets/images/about/atmos-1.jpg" alt="A trio of finished sourdough loaves with dark mahogany crusts on a cutting board" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </a>
+        <a href="#" class="aspect-square rounded-2xl overflow-hidden bg-beige group" data-lightbox="A starter, alive and bubbling">
+          <img src="assets/images/about/atmos-2.jpg" alt="Active sourdough starter bubbling in a mason jar on the counter" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </a>
+        <a href="#" class="aspect-square rounded-2xl overflow-hidden bg-beige group" data-lightbox="The Dutch oven before its work begins">
+          <img src="assets/images/about/atmos-3.jpg" alt="A loaf baking in the red cast iron Dutch oven inside the oven" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </a>
+        <a href="#" class="aspect-square rounded-2xl overflow-hidden bg-beige group" data-lightbox="Loaves resting in a banneton">
+          <img src="assets/images/about/atmos-4.jpg" alt="Three finished loaves stacked close, dusted with flour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </a>
+        <a href="#" class="aspect-square rounded-2xl overflow-hidden bg-beige group" data-lightbox="Finished crust, still warm">
+          <img src="assets/images/about/atmos-5.jpg" alt="A sliced loaf revealing the open, custardy crumb structure" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 md:py-28 bg-brown text-cream">
+      <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+        <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Taste the difference patience makes</h2>
+        <p class="text-cream/80 text-lg mb-8 max-w-xl mx-auto">Pre-order a full or half loaf — baked fresh on your pickup day.</p>
+        <a href="order.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cream text-brown font-medium hover:bg-crust hover:text-cream transition-colors">
+          Place Your Order
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brown text-cream/80">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-4 gap-10">
+      <div class="md:col-span-2">
+        <div class="leading-none mb-4">
+          <span class="font-display text-2xl text-cream block tracking-tight">Communion Breads</span>
+          <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-cream/50 mt-1.5 block">by Soren Deorlow</span>
+        </div>
+        <p class="text-sm leading-relaxed max-w-sm">Bread for your table, baked for you. Small-batch levain sourdough out of a home kitchen, with Swedish craft and patience in every loaf.</p>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Explore</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html"   class="hover:text-cream transition-colors">About</a></li>
+          <li><a href="loaves.html"  class="hover:text-cream transition-colors">Breads</a></li>
+          <li><a href="hosts.html"    class="hover:text-cream transition-colors">For Hosts</a></li>
+          <li><a href="process.html"  class="hover:text-cream transition-colors">The Process</a></li>
+          <li><a href="blessing.html" class="hover:text-cream transition-colors">The Blessing</a></li>
+          <li><a href="order.html"    class="hover:text-cream transition-colors">Order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Follow</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-cream transition-colors">Instagram</a></li>
+          <li><a href="mailto:hello@sorenssourdough.com" class="hover:text-cream transition-colors">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-cream/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-cream/60">
+        <p>© <span id="year">2026</span> Soren's Sourdough · Baked with pride in a home kitchen.</p>
+        <p>Tack så mycket · Thank you</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-brown text-cream shadow-soft opacity-0 pointer-events-none transition-all duration-300 hover:bg-swedish z-40" aria-label="Back to top">
+    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+  </button>
+
+  <div id="lightbox" class="hidden fixed inset-0 z-[60] bg-brown/95 backdrop-blur-sm items-center justify-center p-6" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button id="lightbox-close" class="absolute top-6 right-6 text-cream/80 hover:text-cream p-2" aria-label="Close preview">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <figure class="max-w-5xl w-full">
+      <img id="lightbox-img" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-xl" />
+      <figcaption id="lightbox-caption" class="text-cream/70 text-center mt-4 text-sm"></figcaption>
+    </figure>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Communion Breads — Soren's Sourdough</title>
+  <meta name="description" content="Communion Breads — our hand-crafted sourdough line. Country Levain, Seeded Multigrain, Nordic Rye, and Spelt &amp; Honey. Available as full or half loaves." />
+  <meta name="theme-color" content="#4A3728" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9E%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { beige:'#F5F0E8', cream:'#FAF7F2', brown:'#4A3728', 'brown-soft':'#6B5340', swedish:'#2A5C8A', 'swedish-soft':'#4A7CAA', crust:'#B98655' },
+      fontFamily: { display:['Fraunces','Georgia','serif'], body:['Inter','system-ui','sans-serif'] },
+      boxShadow: { soft:'0 10px 40px -15px rgba(74, 55, 40, 0.25)' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="font-body bg-cream text-brown antialiased">
+
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-cream/90 backdrop-blur-md border-b border-beige">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between" aria-label="Primary">
+      <a href="index.html" class="group block leading-none">
+        <span class="font-display text-[22px] md:text-[26px] text-brown group-hover:text-swedish transition-colors tracking-tight block">Communion Breads</span>
+        <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-brown-soft/70 mt-1.5 block">by Soren Deorlow</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-10 text-[13px] tracking-wide">
+        <li><a href="index.html"   class="nav-link">Home</a></li>
+        <li><a href="about.html"   class="nav-link">About</a></li>
+        <li><a href="loaves.html"  class="nav-link nav-active">Breads</a></li>
+        <li><a href="process.html" class="nav-link">The Process</a></li>
+        <li><a href="order.html"   class="ml-3 px-5 py-2.5 rounded-full bg-brown text-cream hover:bg-swedish transition-colors text-[13px] tracking-wide">Order</a></li>
+      </ul>
+      <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-beige bg-cream">
+      <ul class="px-6 py-4 space-y-1 text-base">
+        <li><a href="index.html"   class="block py-3 border-b border-beige">Home</a></li>
+        <li><a href="about.html"   class="block py-3 border-b border-beige">About</a></li>
+        <li><a href="loaves.html"  class="block py-3 border-b border-beige">Breads</a></li>
+        <li><a href="process.html" class="block py-3 border-b border-beige">The Process</a></li>
+        <li><a href="order.html"   class="block py-3 text-swedish font-semibold">Order →</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="pt-32 md:pt-40 pb-12 md:pb-16 bg-beige">
+      <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+        <span class="text-xs font-medium tracking-[0.2em] uppercase text-swedish">The Line · Brödet</span>
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl mt-5 leading-[1.05]">Communion Breads</h1>
+        <p class="mt-6 text-brown-soft text-lg max-w-2xl mx-auto">Bread made for the table — for tearing, sharing, gathering. Each loaf is naturally leavened with our own levain, fermented for 24–36 hours, and baked one-at-a-time in a 6-quart cast iron Dutch oven. Available as <strong class="text-brown font-semibold">full loaves</strong> (≈1kg) or <strong class="text-brown font-semibold">half loaves</strong> (≈500g).</p>
+      </div>
+    </section>
+
+    <!-- LOAVES GRID -->
+    <section class="py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 grid md:grid-cols-2 gap-12 lg:gap-16">
+
+        <!-- 1 Country Levain -->
+        <article class="group">
+          <a href="#" class="block aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-beige" data-lightbox="Country Levain — our signature daily loaf">
+            <img src="assets/images/loaves/country-levain.jpg" alt="Country Levain — a classic round boule with one elegant curved score and a deeply caramelized crust" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+          </a>
+          <div class="flex items-baseline justify-between gap-4 mb-2">
+            <h2 class="font-display text-3xl">Country Levain</h2>
+            <span class="inline-flex items-center px-3 py-1 rounded-full bg-crust/15 text-crust text-xs font-medium tracking-wider uppercase">Signature</span>
+          </div>
+          <p class="text-brown-soft leading-relaxed mb-4">Our daily loaf. Bread flour and a touch of whole wheat give an open, custardy crumb under a deeply caramelized crust. Versatile, balanced, and never boring.</p>
+          <dl class="text-sm text-brown-soft mb-5">
+            <div class="flex gap-2"><dt class="font-medium text-brown">Ingredients:</dt><dd>bread flour, whole wheat, water, levain, sea salt</dd></div>
+          </dl>
+          <div class="flex items-center justify-between border-t border-beige pt-4">
+            <div class="font-display text-lg">
+              <span class="text-brown">Full $16</span>
+              <span class="text-brown-soft mx-2">·</span>
+              <span class="text-brown">Half $9</span>
+            </div>
+            <a href="order.html" class="text-sm font-medium text-swedish hover:underline">Order →</a>
+          </div>
+        </article>
+
+        <!-- 2 Seeded Multigrain — COMING SOON -->
+        <article class="group">
+          <a href="#" class="block aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-beige relative" data-lightbox="Seeded Multigrain — hearty, nutty, wholesome">
+            <img src="assets/images/loaves/multigrain.jpg" alt="Seeded Multigrain — two hearty loaves with deep wheat-ear scoring, dusted with flour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+            <div class="absolute inset-0 bg-brown/30"></div>
+            <span class="absolute top-4 left-4 inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.22em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+          </a>
+          <div class="flex items-baseline justify-between gap-4 mb-2">
+            <h2 class="font-display text-3xl">Seeded Multigrain</h2>
+            <span class="inline-flex items-center px-3 py-1 rounded-full bg-swedish/15 text-swedish text-xs font-medium tracking-wider uppercase">Wholesome</span>
+          </div>
+          <p class="text-brown-soft leading-relaxed mb-4">Toasted sunflower, flax, sesame, and rolled oats folded through a whole-grain dough. Hearty and nutty — a meal in itself.</p>
+          <dl class="text-sm text-brown-soft mb-5">
+            <div class="flex gap-2"><dt class="font-medium text-brown">Ingredients:</dt><dd>whole wheat, bread flour, sunflower, flax, sesame, oats, water, levain, sea salt</dd></div>
+          </dl>
+          <div class="flex items-center justify-between border-t border-beige pt-4">
+            <div class="font-display text-lg">
+              <span class="text-brown-soft">Full $18</span>
+              <span class="text-brown-soft mx-2">·</span>
+              <span class="text-brown-soft">Half $10</span>
+            </div>
+            <span class="text-sm font-medium text-brown-soft">Coming Soon</span>
+          </div>
+        </article>
+
+        <!-- 3 Nordic Rye — COMING SOON -->
+        <article class="group">
+          <a href="#" class="block aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-beige relative" data-lightbox="Nordic Rye — a Swedish staple, reimagined">
+            <img src="assets/images/loaves/nordic-rye.jpg" alt="Nordic Rye — a dark, dense half loaf wrapped in cellophane and tied with raffia, ready for pickup" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+            <div class="absolute inset-0 bg-brown/30"></div>
+            <span class="absolute top-4 left-4 inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.22em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+          </a>
+          <div class="flex items-baseline justify-between gap-4 mb-2">
+            <h2 class="font-display text-3xl">Nordic Rye</h2>
+            <span class="inline-flex items-center px-3 py-1 rounded-full bg-brown/10 text-brown text-xs font-medium tracking-wider uppercase">Swedish</span>
+          </div>
+          <p class="text-brown-soft leading-relaxed mb-4">A nod to home. Stone-milled rye with caraway and fennel for a dense, tangy crumb that loves butter, cheese, and pickled herring.</p>
+          <dl class="text-sm text-brown-soft mb-5">
+            <div class="flex gap-2"><dt class="font-medium text-brown">Ingredients:</dt><dd>whole rye, bread flour, water, levain, caraway, fennel, sea salt</dd></div>
+          </dl>
+          <div class="flex items-center justify-between border-t border-beige pt-4">
+            <div class="font-display text-lg">
+              <span class="text-brown-soft">Full $17</span>
+              <span class="text-brown-soft mx-2">·</span>
+              <span class="text-brown-soft">Half $9.50</span>
+            </div>
+            <span class="text-sm font-medium text-brown-soft">Coming Soon</span>
+          </div>
+        </article>
+
+        <!-- 4 Spelt & Honey — COMING SOON -->
+        <article class="group">
+          <a href="#" class="block aspect-[4/3] rounded-2xl overflow-hidden mb-6 bg-beige relative" data-lightbox="Spelt & Honey — gentle, sweet, golden">
+            <img src="assets/images/loaves/spelt-honey.jpg" alt="Spelt &amp; Honey — golden, tender loaf with a soft sheen, photographed on a cooling rack" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+            <div class="absolute inset-0 bg-brown/30"></div>
+            <span class="absolute top-4 left-4 inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.22em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+          </a>
+          <div class="flex items-baseline justify-between gap-4 mb-2">
+            <h2 class="font-display text-3xl">Spelt &amp; Honey</h2>
+            <span class="inline-flex items-center px-3 py-1 rounded-full bg-crust/15 text-crust text-xs font-medium tracking-wider uppercase">Seasonal</span>
+          </div>
+          <p class="text-brown-soft leading-relaxed mb-4">Heritage spelt and a whisper of local wildflower honey. Tender, golden crumb with a soft sweetness — beloved by kids and toast lovers alike.</p>
+          <dl class="text-sm text-brown-soft mb-5">
+            <div class="flex gap-2"><dt class="font-medium text-brown">Ingredients:</dt><dd>spelt, bread flour, water, levain, local honey, sea salt</dd></div>
+          </dl>
+          <div class="flex items-center justify-between border-t border-beige pt-4">
+            <div class="font-display text-lg">
+              <span class="text-brown-soft">Full $18</span>
+              <span class="text-brown-soft mx-2">·</span>
+              <span class="text-brown-soft">Half $10</span>
+            </div>
+            <span class="text-sm font-medium text-brown-soft">Coming Soon</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============== PASTRIES — COMING SOON ============== -->
+    <section class="pb-20">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <span class="text-xs font-medium tracking-[0.22em] uppercase text-swedish">Bakverk · The Pastries</span>
+            <h2 class="font-display text-4xl md:text-5xl mt-4 leading-tight">Croissants, coming soon</h2>
+          </div>
+          <p class="text-brown-soft max-w-sm md:text-right">Hand-laminated, all-butter, baked the morning of pickup. Joining the line soon.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+
+          <!-- Croissant -->
+          <article class="group">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-5 bg-beige relative">
+              <img src="assets/images/pastries/croissant.jpg" alt="Golden, all-butter croissants on a tray — shatteringly crisp" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+              <div class="absolute inset-0 bg-brown/30"></div>
+              <span class="absolute top-4 left-4 inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.22em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+            </div>
+            <h3 class="font-display text-2xl mb-2 leading-tight">Croissant</h3>
+            <p class="text-brown-soft text-sm leading-relaxed">All-butter, laminated by hand, baked until shatteringly crisp. The morning ritual for breakfast tables.</p>
+          </article>
+
+          <!-- Almond Croissant -->
+          <article class="group">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-5 bg-beige relative">
+              <img src="assets/images/pastries/almond.jpg" alt="Three almond croissants on a white plate — toasted almonds and powdered sugar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+              <div class="absolute inset-0 bg-brown/30"></div>
+              <span class="absolute top-4 left-4 inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.22em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+            </div>
+            <h3 class="font-display text-2xl mb-2 leading-tight">Almond Croissant</h3>
+            <p class="text-brown-soft text-sm leading-relaxed">Yesterday's croissant, reborn — soaked in syrup, filled with frangipane, finished with toasted almonds and powdered sugar.</p>
+          </article>
+
+          <!-- Chocolate Croissant -->
+          <article class="group">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-5 bg-beige relative">
+              <img src="assets/images/pastries/chocolate.jpg" alt="Chocolate croissants with powdered sugar and chocolate visible" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+              <div class="absolute inset-0 bg-brown/30"></div>
+              <span class="absolute top-4 left-4 inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.22em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+            </div>
+            <h3 class="font-display text-2xl mb-2 leading-tight">Chocolate Croissant</h3>
+            <p class="text-brown-soft text-sm leading-relaxed">Pain au chocolat. Two dark chocolate batons folded into laminated dough, baked until the chocolate goes molten.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTE -->
+    <section class="pb-20">
+      <div class="max-w-3xl mx-auto px-6 lg:px-10 bg-beige rounded-2xl p-8 text-center">
+        <p class="text-brown-soft leading-relaxed"><strong class="text-brown">A small note:</strong> All loaves are pre-order only and baked fresh on your pickup day. Weights are approximate — sourdough has a mind of its own.</p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 md:py-28 bg-brown text-cream">
+      <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+        <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Pick your bread</h2>
+        <p class="text-cream/80 text-lg mb-8 max-w-xl mx-auto">Mix and match — order a full Country Levain and a half Nordic Rye on the same day.</p>
+        <a href="order.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cream text-brown font-medium hover:bg-crust hover:text-cream transition-colors">
+          Start Your Order
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brown text-cream/80">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-4 gap-10">
+      <div class="md:col-span-2">
+        <div class="leading-none mb-4">
+          <span class="font-display text-2xl text-cream block tracking-tight">Communion Breads</span>
+          <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-cream/50 mt-1.5 block">by Soren Deorlow</span>
+        </div>
+        <p class="text-sm leading-relaxed max-w-sm">Bread for your table, baked for you. Small-batch levain sourdough out of a home kitchen, with Swedish craft and patience in every loaf.</p>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Explore</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html"   class="hover:text-cream transition-colors">About</a></li>
+          <li><a href="loaves.html"  class="hover:text-cream transition-colors">Breads</a></li>
+          <li><a href="hosts.html"    class="hover:text-cream transition-colors">For Hosts</a></li>
+          <li><a href="process.html"  class="hover:text-cream transition-colors">The Process</a></li>
+          <li><a href="blessing.html" class="hover:text-cream transition-colors">The Blessing</a></li>
+          <li><a href="order.html"    class="hover:text-cream transition-colors">Order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Follow</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-cream transition-colors">Instagram</a></li>
+          <li><a href="mailto:hello@sorenssourdough.com" class="hover:text-cream transition-colors">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-cream/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-cream/60">
+        <p>© <span id="year">2026</span> Soren's Sourdough · Baked with pride in a home kitchen.</p>
+        <p>Tack så mycket · Thank you</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-brown text-cream shadow-soft opacity-0 pointer-events-none transition-all duration-300 hover:bg-swedish z-40" aria-label="Back to top">
+    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+  </button>
+
+  <div id="lightbox" class="hidden fixed inset-0 z-[60] bg-brown/95 backdrop-blur-sm items-center justify-center p-6" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button id="lightbox-close" class="absolute top-6 right-6 text-cream/80 hover:text-cream p-2" aria-label="Close preview">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <figure class="max-w-5xl w-full">
+      <img id="lightbox-img" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-xl" />
+      <figcaption id="lightbox-caption" class="text-cream/70 text-center mt-4 text-sm"></figcaption>
+    </figure>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

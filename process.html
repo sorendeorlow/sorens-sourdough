@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Process — Soren's Sourdough</title>
+  <meta name="description" content="A look inside our baking process — from levain starter to long fermentation, hand-shaping, and a final bake in a 6-quart cast iron Dutch oven." />
+  <meta name="theme-color" content="#4A3728" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9E%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { beige:'#F5F0E8', cream:'#FAF7F2', brown:'#4A3728', 'brown-soft':'#6B5340', swedish:'#2A5C8A', 'swedish-soft':'#4A7CAA', crust:'#B98655' },
+      fontFamily: { display:['Fraunces','Georgia','serif'], body:['Inter','system-ui','sans-serif'] },
+      boxShadow: { soft:'0 10px 40px -15px rgba(74, 55, 40, 0.25)' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="font-body bg-cream text-brown antialiased">
+
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-cream/90 backdrop-blur-md border-b border-beige">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between" aria-label="Primary">
+      <a href="index.html" class="group block leading-none">
+        <span class="font-display text-[22px] md:text-[26px] text-brown group-hover:text-swedish transition-colors tracking-tight block">Communion Breads</span>
+        <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-brown-soft/70 mt-1.5 block">by Soren Deorlow</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-10 text-[13px] tracking-wide">
+        <li><a href="index.html"   class="nav-link">Home</a></li>
+        <li><a href="about.html"   class="nav-link">About</a></li>
+        <li><a href="loaves.html"  class="nav-link">Breads</a></li>
+        <li><a href="process.html" class="nav-link nav-active">The Process</a></li>
+        <li><a href="order.html"   class="ml-3 px-5 py-2.5 rounded-full bg-brown text-cream hover:bg-swedish transition-colors text-[13px] tracking-wide">Order</a></li>
+      </ul>
+      <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-beige bg-cream">
+      <ul class="px-6 py-4 space-y-1 text-base">
+        <li><a href="index.html"   class="block py-3 border-b border-beige">Home</a></li>
+        <li><a href="about.html"   class="block py-3 border-b border-beige">About</a></li>
+        <li><a href="loaves.html"  class="block py-3 border-b border-beige">Breads</a></li>
+        <li><a href="process.html" class="block py-3 border-b border-beige">The Process</a></li>
+        <li><a href="order.html"   class="block py-3 text-swedish font-semibold">Order →</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="pt-32 md:pt-40 pb-12 md:pb-16 bg-beige">
+      <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+        <span class="text-xs font-medium tracking-[0.2em] uppercase text-swedish">Hantverket · The Craft</span>
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl mt-5 leading-[1.05]">The process</h1>
+        <p class="mt-6 text-brown-soft text-lg max-w-2xl mx-auto">A loaf of sourdough is built over two days. Here's how each one comes together — from a bubbling starter to a Dutch oven crackling in the heat.</p>
+      </div>
+    </section>
+
+    <!-- STEPS -->
+    <section class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-6 lg:px-10 space-y-20 md:space-y-28">
+
+        <!-- 01 -->
+        <article class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <a href="#" class="block aspect-[4/5] rounded-2xl overflow-hidden bg-beige shadow-soft" data-lightbox="The levain starter — alive and bubbling">
+            <img src="assets/images/process/01-levain.jpg" alt="Active levain in water in a stainless mixing bowl, bubbles rising — the start of every bake" class="w-full h-full object-cover" loading="lazy" />
+          </a>
+          <div>
+            <div class="font-display text-6xl text-crust mb-4">01</div>
+            <h2 class="font-display text-3xl md:text-4xl mb-4 leading-tight">The levain</h2>
+            <p class="text-brown-soft leading-relaxed mb-3">It all starts with a starter — a living culture of wild yeast and bacteria we've been feeding for years. The evening before each bake, a portion is refreshed with fresh flour and water and left to double overnight.</p>
+            <p class="text-brown-soft leading-relaxed">No commercial yeast, ever. This is what gives our bread its tang, depth, and digestibility.</p>
+            <p class="mt-5 text-xs tracking-wider uppercase text-swedish">~12 hours</p>
+          </div>
+        </article>
+
+        <!-- 02 -->
+        <article class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div class="md:order-2">
+            <a href="#" class="block aspect-[4/5] rounded-2xl overflow-hidden bg-beige shadow-soft" data-lightbox="Mixing the dough — flour, water, levain, salt">
+              <img src="assets/images/process/02-mixing.jpg" alt="Just-mixed shaggy dough resting in a white bowl after autolyse, surface glistening" class="w-full h-full object-cover" loading="lazy" />
+            </a>
+          </div>
+          <div class="md:order-1">
+            <div class="font-display text-6xl text-crust mb-4">02</div>
+            <h2 class="font-display text-3xl md:text-4xl mb-4 leading-tight">Mixing &amp; autolyse</h2>
+            <p class="text-brown-soft leading-relaxed mb-3">Flour and water rest together first — a quiet hour called the autolyse — letting the flour fully hydrate and gluten develop on its own. Then the levain and salt go in, mixed by hand.</p>
+            <p class="text-brown-soft leading-relaxed">No mixer. No machines. Just feel.</p>
+            <p class="mt-5 text-xs tracking-wider uppercase text-swedish">~1 hour</p>
+          </div>
+        </article>
+
+        <!-- 03 -->
+        <article class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <a href="#" class="block aspect-[4/5] rounded-2xl overflow-hidden bg-beige shadow-soft" data-lightbox="Bulk fermentation — gentle stretch and folds">
+            <img src="assets/images/process/03-bulk.jpg" alt="A shaped boule resting in a flour-dusted wicker banneton, basket rings visible, linen towel behind" class="w-full h-full object-cover" loading="lazy" />
+          </a>
+          <div>
+            <div class="font-display text-6xl text-crust mb-4">03</div>
+            <h2 class="font-display text-3xl md:text-4xl mb-4 leading-tight">Bulk fermentation</h2>
+            <p class="text-brown-soft leading-relaxed mb-3">The dough rests at room temperature for 4–6 hours with gentle stretch-and-folds every 30 minutes. This builds strength without overworking the gluten.</p>
+            <p class="text-brown-soft leading-relaxed">It's the slow part — and the most important part.</p>
+            <p class="mt-5 text-xs tracking-wider uppercase text-swedish">~4–6 hours</p>
+          </div>
+        </article>
+
+        <!-- 04 -->
+        <article class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div class="md:order-2">
+            <a href="#" class="block aspect-[4/5] rounded-2xl overflow-hidden bg-beige shadow-soft" data-lightbox="Shaping and the cold retard in the fridge">
+              <img src="assets/images/process/04-shape.jpg" alt="Soren's hands shaping a boule on a floured counter, linen towel and bowl nearby" class="w-full h-full object-cover" loading="lazy" />
+            </a>
+          </div>
+          <div class="md:order-1">
+            <div class="font-display text-6xl text-crust mb-4">04</div>
+            <h2 class="font-display text-3xl md:text-4xl mb-4 leading-tight">Shape &amp; cold retard</h2>
+            <p class="text-brown-soft leading-relaxed mb-3">Each loaf is shaped by hand and placed in a linen-lined banneton, then tucked into the fridge overnight for a long, cold fermentation.</p>
+            <p class="text-brown-soft leading-relaxed">This slow rest is where the deep, complex flavor comes from.</p>
+            <p class="mt-5 text-xs tracking-wider uppercase text-swedish">~12–18 hours</p>
+          </div>
+        </article>
+
+        <!-- 05 -->
+        <article class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <a href="#" class="block aspect-[4/5] rounded-2xl overflow-hidden bg-beige shadow-soft" data-lightbox="Scoring just before the bake">
+            <img src="assets/images/process/05-bake.jpg" alt="A scored loaf in the red cast iron Dutch oven, multi-petal scoring pattern, ready to bake" class="w-full h-full object-cover" loading="lazy" />
+          </a>
+          <div>
+            <div class="font-display text-6xl text-crust mb-4">05</div>
+            <h2 class="font-display text-3xl md:text-4xl mb-4 leading-tight">Score &amp; bake</h2>
+            <p class="text-brown-soft leading-relaxed mb-3">Each loaf gets a quick, confident score with a lame, then into a screaming-hot 6-quart cast iron Dutch oven. The lid traps steam — giving us that signature crackling, blistered crust.</p>
+            <p class="text-brown-soft leading-relaxed">Twenty minutes covered, twenty-five minutes uncovered, until the crust is a deep, caramel mahogany.</p>
+            <p class="mt-5 text-xs tracking-wider uppercase text-swedish">~45 minutes</p>
+          </div>
+        </article>
+
+        <!-- 06 -->
+        <article class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div class="md:order-2">
+            <a href="#" class="block aspect-[4/5] rounded-2xl overflow-hidden bg-beige shadow-soft" data-lightbox="Cooling — the final, patient step">
+              <img src="assets/images/process/06-cool.jpg" alt="Three finished loaves stacked on a wooden cutting board, cooling after the bake" class="w-full h-full object-cover" loading="lazy" />
+            </a>
+          </div>
+          <div class="md:order-1">
+            <div class="font-display text-6xl text-crust mb-4">06</div>
+            <h2 class="font-display text-3xl md:text-4xl mb-4 leading-tight">Rest &amp; cool</h2>
+            <p class="text-brown-soft leading-relaxed mb-3">The hardest part. The loaf must rest for at least an hour to finish cooking from the inside out. You'll hear it sing — quiet crackles as the crust contracts.</p>
+            <p class="text-brown-soft leading-relaxed">Then it's yours.</p>
+            <p class="mt-5 text-xs tracking-wider uppercase text-swedish">~1 hour</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- TOTAL TIME -->
+    <section class="py-16 bg-beige">
+      <div class="max-w-3xl mx-auto px-6 lg:px-10 text-center">
+        <span class="text-xs font-medium tracking-[0.2em] uppercase text-swedish">Start to Finish</span>
+        <h2 class="font-display text-4xl md:text-5xl mt-4 mb-4 leading-tight">Roughly 36 hours per loaf</h2>
+        <p class="text-brown-soft leading-relaxed">There's no shortcut. That's the point.</p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 md:py-28 bg-brown text-cream">
+      <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+        <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">Order your loaf</h2>
+        <p class="text-cream/80 text-lg mb-8 max-w-xl mx-auto">Pre-order yours and we'll start the levain the night before.</p>
+        <a href="order.html" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-cream text-brown font-medium hover:bg-crust hover:text-cream transition-colors">
+          Order Now
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brown text-cream/80">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-4 gap-10">
+      <div class="md:col-span-2">
+        <div class="leading-none mb-4">
+          <span class="font-display text-2xl text-cream block tracking-tight">Communion Breads</span>
+          <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-cream/50 mt-1.5 block">by Soren Deorlow</span>
+        </div>
+        <p class="text-sm leading-relaxed max-w-sm">Bread for your table, baked for you. Small-batch levain sourdough out of a home kitchen, with Swedish craft and patience in every loaf.</p>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Explore</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html"   class="hover:text-cream transition-colors">About</a></li>
+          <li><a href="loaves.html"  class="hover:text-cream transition-colors">Breads</a></li>
+          <li><a href="hosts.html"    class="hover:text-cream transition-colors">For Hosts</a></li>
+          <li><a href="process.html"  class="hover:text-cream transition-colors">The Process</a></li>
+          <li><a href="blessing.html" class="hover:text-cream transition-colors">The Blessing</a></li>
+          <li><a href="order.html"    class="hover:text-cream transition-colors">Order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Follow</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-cream transition-colors">Instagram</a></li>
+          <li><a href="mailto:hello@sorenssourdough.com" class="hover:text-cream transition-colors">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-cream/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-cream/60">
+        <p>© <span id="year">2026</span> Soren's Sourdough · Baked with pride in a home kitchen.</p>
+        <p>Tack så mycket · Thank you</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-brown text-cream shadow-soft opacity-0 pointer-events-none transition-all duration-300 hover:bg-swedish z-40" aria-label="Back to top">
+    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+  </button>
+
+  <div id="lightbox" class="hidden fixed inset-0 z-[60] bg-brown/95 backdrop-blur-sm items-center justify-center p-6" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button id="lightbox-close" class="absolute top-6 right-6 text-cream/80 hover:text-cream p-2" aria-label="Close preview">
+      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <figure class="max-w-5xl w-full">
+      <img id="lightbox-img" src="" alt="" class="w-full max-h-[80vh] object-contain rounded-xl" />
+      <figcaption id="lightbox-caption" class="text-cream/70 text-center mt-4 text-sm"></figcaption>
+    </figure>
+  </div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

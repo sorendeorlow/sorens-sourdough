@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order — Soren's Sourdough</title>
+  <meta name="description" content="Pre-order your hand-crafted sourdough loaf — full or half, multiple varieties. Baked fresh on your pickup day." />
+  <meta name="theme-color" content="#4A3728" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9E%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { beige:'#F5F0E8', cream:'#FAF7F2', brown:'#4A3728', 'brown-soft':'#6B5340', swedish:'#2A5C8A', 'swedish-soft':'#4A7CAA', crust:'#B98655' },
+      fontFamily: { display:['Fraunces','Georgia','serif'], body:['Inter','system-ui','sans-serif'] },
+      boxShadow: { soft:'0 10px 40px -15px rgba(74, 55, 40, 0.25)' }
+    } } }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="font-body bg-cream text-brown antialiased">
+
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-cream/90 backdrop-blur-md border-b border-beige">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between" aria-label="Primary">
+      <a href="index.html" class="group block leading-none">
+        <span class="font-display text-[22px] md:text-[26px] text-brown group-hover:text-swedish transition-colors tracking-tight block">Communion Breads</span>
+        <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-brown-soft/70 mt-1.5 block">by Soren Deorlow</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-10 text-[13px] tracking-wide">
+        <li><a href="index.html"   class="nav-link">Home</a></li>
+        <li><a href="about.html"   class="nav-link">About</a></li>
+        <li><a href="loaves.html"  class="nav-link">Breads</a></li>
+        <li><a href="process.html" class="nav-link">The Process</a></li>
+        <li><a href="order.html"   class="ml-3 px-5 py-2.5 rounded-full bg-swedish text-cream hover:bg-brown transition-colors text-[13px] tracking-wide">Order</a></li>
+      </ul>
+      <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-beige bg-cream">
+      <ul class="px-6 py-4 space-y-1 text-base">
+        <li><a href="index.html"   class="block py-3 border-b border-beige">Home</a></li>
+        <li><a href="about.html"   class="block py-3 border-b border-beige">About</a></li>
+        <li><a href="loaves.html"  class="block py-3 border-b border-beige">Breads</a></li>
+        <li><a href="process.html" class="block py-3 border-b border-beige">The Process</a></li>
+        <li><a href="order.html"   class="block py-3 text-swedish font-semibold">Order →</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section class="pt-32 md:pt-40 pb-12 md:pb-16 bg-beige">
+      <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
+        <span class="text-xs font-medium tracking-[0.2em] uppercase text-swedish">Beställ · Place an Order</span>
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl mt-5 leading-[1.05]">Order a loaf</h1>
+        <p class="mt-6 text-brown-soft text-lg max-w-2xl mx-auto">Pre-order only — baked fresh to order. Choose your loaves, pick a date, and we'll handle the rest.</p>
+      </div>
+    </section>
+
+    <!-- FORM + INFO -->
+    <section class="py-16 md:py-24">
+      <div class="max-w-6xl mx-auto px-6 lg:px-10 grid lg:grid-cols-3 gap-10 lg:gap-16">
+
+        <!-- FORM -->
+        <form id="order-form"
+              action="https://formspree.io/f/YOUR_FORM_ID"
+              method="POST"
+              class="lg:col-span-2 bg-cream rounded-3xl p-7 md:p-10 shadow-soft border border-beige space-y-6">
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <label class="block">
+              <span class="text-sm font-medium text-brown mb-1.5 block">Name <span class="text-crust">*</span></span>
+              <input type="text" name="name" required autocomplete="name" placeholder="Your full name"
+                class="w-full px-4 py-3 rounded-xl bg-beige/60 border border-beige focus:outline-none focus:ring-2 focus:ring-swedish focus:bg-cream transition" />
+            </label>
+            <label class="block">
+              <span class="text-sm font-medium text-brown mb-1.5 block">Email <span class="text-crust">*</span></span>
+              <input type="email" name="email" required autocomplete="email" placeholder="you@email.com"
+                class="w-full px-4 py-3 rounded-xl bg-beige/60 border border-beige focus:outline-none focus:ring-2 focus:ring-swedish focus:bg-cream transition" />
+            </label>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <label class="block">
+              <span class="text-sm font-medium text-brown mb-1.5 block">Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" placeholder="(555) 123-4567"
+                class="w-full px-4 py-3 rounded-xl bg-beige/60 border border-beige focus:outline-none focus:ring-2 focus:ring-swedish focus:bg-cream transition" />
+            </label>
+            <label class="block">
+              <span class="text-sm font-medium text-brown mb-1.5 block">Pickup date <span class="text-crust">*</span></span>
+              <input type="date" name="pickup_date" required
+                class="w-full px-4 py-3 rounded-xl bg-beige/60 border border-beige focus:outline-none focus:ring-2 focus:ring-swedish focus:bg-cream transition" />
+            </label>
+          </div>
+
+          <!-- ITEM SELECTION -->
+          <fieldset class="border-t border-beige pt-6">
+            <legend class="font-display text-2xl mb-2">Choose your loaves</legend>
+            <p class="text-sm text-brown-soft mb-5">Country Levain is what's baking right now. The rest of the line is on the way.</p>
+
+            <!-- BREADS -->
+            <p class="text-[11px] font-medium tracking-[0.22em] uppercase text-swedish mb-3">Breads</p>
+            <div class="space-y-3 mb-8">
+
+              <!-- Country Levain — AVAILABLE -->
+              <div class="grid grid-cols-12 gap-3 items-center bg-beige/60 rounded-xl p-4 ring-1 ring-brown/5">
+                <div class="col-span-12 sm:col-span-6">
+                  <p class="font-display text-lg leading-tight">Country Levain</p>
+                  <p class="text-xs text-brown-soft">Full $16 · Half $9</p>
+                </div>
+                <label class="col-span-6 sm:col-span-3 text-xs">
+                  <span class="text-brown-soft block mb-1">Full</span>
+                  <input type="number" name="country_full" min="0" max="10" value="0" class="qty w-full px-3 py-2 rounded-lg bg-cream border border-beige text-center" />
+                </label>
+                <label class="col-span-6 sm:col-span-3 text-xs">
+                  <span class="text-brown-soft block mb-1">Half</span>
+                  <input type="number" name="country_half" min="0" max="10" value="0" class="qty w-full px-3 py-2 rounded-lg bg-cream border border-beige text-center" />
+                </label>
+              </div>
+
+              <!-- Seeded Multigrain — COMING SOON -->
+              <div class="grid grid-cols-12 gap-3 items-center bg-beige/30 rounded-xl p-4 opacity-70">
+                <div class="col-span-12 sm:col-span-6">
+                  <p class="font-display text-lg leading-tight text-brown">Seeded Multigrain</p>
+                  <p class="text-xs text-brown-soft/80">Full $18 · Half $10</p>
+                </div>
+                <div class="col-span-12 sm:col-span-6 sm:text-right">
+                  <span class="inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+                </div>
+              </div>
+
+              <!-- Nordic Rye — COMING SOON -->
+              <div class="grid grid-cols-12 gap-3 items-center bg-beige/30 rounded-xl p-4 opacity-70">
+                <div class="col-span-12 sm:col-span-6">
+                  <p class="font-display text-lg leading-tight text-brown">Nordic Rye</p>
+                  <p class="text-xs text-brown-soft/80">Full $17 · Half $9.50</p>
+                </div>
+                <div class="col-span-12 sm:col-span-6 sm:text-right">
+                  <span class="inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+                </div>
+              </div>
+
+              <!-- Spelt & Honey — COMING SOON -->
+              <div class="grid grid-cols-12 gap-3 items-center bg-beige/30 rounded-xl p-4 opacity-70">
+                <div class="col-span-12 sm:col-span-6">
+                  <p class="font-display text-lg leading-tight text-brown">Spelt &amp; Honey</p>
+                  <p class="text-xs text-brown-soft/80">Full $18 · Half $10</p>
+                </div>
+                <div class="col-span-12 sm:col-span-6 sm:text-right">
+                  <span class="inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- PASTRIES -->
+            <p class="text-[11px] font-medium tracking-[0.22em] uppercase text-swedish mb-3">Pastries</p>
+            <div class="space-y-3">
+
+              <!-- Croissant — COMING SOON -->
+              <div class="grid grid-cols-12 gap-3 items-center bg-beige/30 rounded-xl p-4 opacity-70">
+                <div class="col-span-12 sm:col-span-6">
+                  <p class="font-display text-lg leading-tight text-brown">Croissant</p>
+                  <p class="text-xs text-brown-soft/80">All butter, laminated by hand</p>
+                </div>
+                <div class="col-span-12 sm:col-span-6 sm:text-right">
+                  <span class="inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+                </div>
+              </div>
+
+              <!-- Almond Croissant — COMING SOON -->
+              <div class="grid grid-cols-12 gap-3 items-center bg-beige/30 rounded-xl p-4 opacity-70">
+                <div class="col-span-12 sm:col-span-6">
+                  <p class="font-display text-lg leading-tight text-brown">Almond Croissant</p>
+                  <p class="text-xs text-brown-soft/80">Frangipane filling, toasted almonds</p>
+                </div>
+                <div class="col-span-12 sm:col-span-6 sm:text-right">
+                  <span class="inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+                </div>
+              </div>
+
+              <!-- Chocolate Croissant — COMING SOON -->
+              <div class="grid grid-cols-12 gap-3 items-center bg-beige/30 rounded-xl p-4 opacity-70">
+                <div class="col-span-12 sm:col-span-6">
+                  <p class="font-display text-lg leading-tight text-brown">Chocolate Croissant</p>
+                  <p class="text-xs text-brown-soft/80">Pain au chocolat, dark chocolate batons</p>
+                </div>
+                <div class="col-span-12 sm:col-span-6 sm:text-right">
+                  <span class="inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- TOTAL -->
+            <div class="mt-6 flex items-center justify-between bg-brown text-cream rounded-xl px-5 py-4">
+              <span class="text-sm tracking-wider uppercase">Estimated total</span>
+              <span class="font-display text-2xl"><span id="order-total">$0.00</span></span>
+            </div>
+            <input type="hidden" name="order_total" id="order-total-hidden" value="$0.00" />
+          </fieldset>
+
+          <label class="block">
+            <span class="text-sm font-medium text-brown mb-1.5 block">Notes</span>
+            <textarea name="notes" rows="3" placeholder="Allergies, special requests, pickup time, etc."
+              class="w-full px-4 py-3 rounded-xl bg-beige/60 border border-beige focus:outline-none focus:ring-2 focus:ring-swedish focus:bg-cream transition resize-y"></textarea>
+          </label>
+
+          <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-brown text-cream font-medium hover:bg-swedish transition-colors shadow-soft">
+            Send Order Request
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+
+          <p id="form-feedback" class="hidden text-center text-sm bg-swedish/10 text-swedish rounded-xl px-4 py-3" role="status"></p>
+        </form>
+
+        <!-- INFO SIDEBAR -->
+        <aside class="space-y-6">
+          <div class="bg-beige rounded-2xl overflow-hidden">
+            <div class="aspect-[4/3] overflow-hidden bg-cream">
+              <img src="assets/images/packaged/IMG_8557.jpg" alt="A finished loaf, wrapped in cellophane, tied with raffia — ready for pickup" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="p-7">
+              <h3 class="font-display text-2xl mb-3">What comes with your loaf</h3>
+              <ul class="text-sm text-brown-soft leading-relaxed space-y-2.5">
+                <li class="flex gap-3"><span class="text-crust mt-0.5">·</span>Wrapped in cellophane, tied in raffia</li>
+                <li class="flex gap-3"><span class="text-crust mt-0.5">·</span>A handwritten tag with your name and bake date</li>
+                <li class="flex gap-3"><span class="text-crust mt-0.5">·</span>A blessing card — a line of Scripture, a grace for the table (<a href="blessing.html" class="text-swedish hover:underline">why</a>)</li>
+                <li class="flex gap-3"><span class="text-crust mt-0.5">·</span>Still warm enough to break by hand</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-beige rounded-2xl p-7">
+            <h3 class="font-display text-2xl mb-3">How it works</h3>
+            <p class="text-sm text-brown-soft leading-relaxed mb-3"><strong class="text-brown">Pre-order, 48 hours ahead.</strong> Every loaf is baked the morning of your pickup. No shelf inventory, no leftovers — yours is yours.</p>
+            <p class="text-sm text-brown-soft leading-relaxed mb-3"><strong class="text-brown">Pickup, 3–6 PM.</strong> From our home kitchen on your selected date. We'll confirm the exact window when we respond.</p>
+            <p class="text-sm text-brown-soft leading-relaxed">Cash or Venmo at pickup.</p>
+          </div>
+
+          <div class="bg-brown text-cream rounded-2xl p-7">
+            <h3 class="font-display text-2xl mb-3 text-crust">Hosting something bigger?</h3>
+            <p class="text-sm text-cream/80 leading-relaxed mb-4">Sunday dinner, dinner party, holiday spread — see our <a href="hosts.html" class="underline decoration-crust underline-offset-4 hover:text-crust">host bundles</a> for the table.</p>
+            <p class="text-sm text-cream/80 leading-relaxed">Or just email — <a href="mailto:hello@sorenssourdough.com" class="text-cream underline decoration-crust underline-offset-4 hover:text-crust transition-colors">hello@sorenssourdough.com</a>.</p>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brown text-cream/80">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-4 gap-10">
+      <div class="md:col-span-2">
+        <div class="leading-none mb-4">
+          <span class="font-display text-2xl text-cream block tracking-tight">Communion Breads</span>
+          <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-cream/50 mt-1.5 block">by Soren Deorlow</span>
+        </div>
+        <p class="text-sm leading-relaxed max-w-sm">Bread for your table, baked for you. Small-batch levain sourdough out of a home kitchen, with Swedish craft and patience in every loaf.</p>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Explore</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html"   class="hover:text-cream transition-colors">About</a></li>
+          <li><a href="loaves.html"  class="hover:text-cream transition-colors">Breads</a></li>
+          <li><a href="hosts.html"    class="hover:text-cream transition-colors">For Hosts</a></li>
+          <li><a href="process.html"  class="hover:text-cream transition-colors">The Process</a></li>
+          <li><a href="blessing.html" class="hover:text-cream transition-colors">The Blessing</a></li>
+          <li><a href="order.html"    class="hover:text-cream transition-colors">Order</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Follow</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-cream transition-colors">Instagram</a></li>
+          <li><a href="mailto:hello@sorenssourdough.com" class="hover:text-cream transition-colors">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-cream/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-cream/60">
+        <p>© <span id="year">2026</span> Soren's Sourdough · Baked with pride in a home kitchen.</p>
+        <p>Tack så mycket · Thank you</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-brown text-cream shadow-soft opacity-0 pointer-events-none transition-all duration-300 hover:bg-swedish z-40" aria-label="Back to top">
+    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+  </button>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

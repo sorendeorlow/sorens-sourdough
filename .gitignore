@@ -1,0 +1,10 @@
+# Mac
+.DS_Store
+
+# Tooling caches
+.gstack/
+
+# Working/source material — not for the published site
+Sourdough/
+_staging/
+assets/images/_incoming/
