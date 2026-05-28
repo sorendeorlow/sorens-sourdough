@@ -107,7 +107,7 @@
       grid-template-columns: 1fr auto;
       grid-template-rows: auto 1fr auto;
       column-gap: 0.22in;
-      row-gap: 0.06in;
+      row-gap: 0.08in;
       overflow: hidden;
     }
 
@@ -125,16 +125,21 @@
     }
 
     .label .eyebrow {
-      grid-column: 1 / 2;
+      grid-column: 1 / 3;
       grid-row: 1 / 2;
-      font-family: 'Inter', sans-serif;
-      font-size: 8.5px;
-      font-weight: 500;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--crust);
       padding-left: 0.34in; /* clear the hole */
-      margin-bottom: 0.04in;
+      margin-bottom: 0.02in;
+    }
+    .label .eyebrow .pill {
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 6.5px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 4px 8px 3px;
     }
 
     .label .brand {
@@ -144,17 +149,24 @@
       font-family: 'Fraunces', serif;
       font-weight: 500;
       font-size: 22px;
-      line-height: 1.05;
-      letter-spacing: -0.015em;
+      line-height: 1.02;
+      letter-spacing: -0.018em;
       color: var(--brown);
     }
-    .label .brand .amp {
-      font-style: italic;
-      color: var(--crust);
+    .label .brand .by {
+      display: block;
+      margin-top: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 7.5px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--soft);
+      opacity: 0.8;
     }
     .label .brand .swirl {
       display: block;
-      width: 36px;
+      width: 32px;
       height: 1px;
       background: var(--crust);
       margin-top: 8px;
@@ -163,24 +175,28 @@
     .label .madeby {
       grid-column: 1 / 2;
       grid-row: 3 / 4;
-      font-size: 9.5px;
+      font-size: 9px;
       line-height: 1.45;
       color: var(--soft);
       align-self: end;
     }
-    .label .madeby strong {
+    .label .madeby .tagline {
       display: block;
       font-family: 'Fraunces', serif;
       font-weight: 500;
       font-style: italic;
-      font-size: 11px;
+      font-size: 11.5px;
+      line-height: 1.2;
       color: var(--brown);
-      letter-spacing: 0.005em;
-      margin-bottom: 2px;
+      letter-spacing: -0.005em;
+      margin-bottom: 4px;
     }
-    .label .madeby .tack {
+    .label .madeby .tagline .you {
+      color: var(--crust);
+      font-style: normal;
+    }
+    .label .madeby .where {
       display: block;
-      margin-top: 4px;
       font-size: 8.5px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -261,12 +277,11 @@
   <div class="sheet" id="sheet">
     <!-- 4 labels -->
     <div class="label">
-      <div class="eyebrow">Hand-baked · Levain</div>
-      <div class="brand">Soren&rsquo;s<br>Sourdough<span class="swirl"></span></div>
+      <div class="eyebrow"><span class="pill">Brutet Bröd · Bread for the Table</span></div>
+      <div class="brand">Communion<br>Breads<span class="swirl"></span><span class="by">by Soren Deorlow</span></div>
       <div class="madeby">
-        <strong>Made with care in La Costa Oaks</strong>
-        Swedish craft in every crumb.
-        <span class="tack">Tack så mycket</span>
+        <span class="tagline">Bread for your table,<br>baked for <span class="you">you</span>.</span>
+        <span class="where">Made with care in La Costa Oaks</span>
       </div>
       <div class="qr-block">
         <div class="qr" data-qr></div>
@@ -275,12 +290,11 @@
     </div>
 
     <div class="label">
-      <div class="eyebrow">Hand-baked · Levain</div>
-      <div class="brand">Soren&rsquo;s<br>Sourdough<span class="swirl"></span></div>
+      <div class="eyebrow"><span class="pill">Brutet Bröd · Bread for the Table</span></div>
+      <div class="brand">Communion<br>Breads<span class="swirl"></span><span class="by">by Soren Deorlow</span></div>
       <div class="madeby">
-        <strong>Made with care in La Costa Oaks</strong>
-        Swedish craft in every crumb.
-        <span class="tack">Tack så mycket</span>
+        <span class="tagline">Bread for your table,<br>baked for <span class="you">you</span>.</span>
+        <span class="where">Made with care in La Costa Oaks</span>
       </div>
       <div class="qr-block">
         <div class="qr" data-qr></div>
@@ -289,12 +303,11 @@
     </div>
 
     <div class="label">
-      <div class="eyebrow">Hand-baked · Levain</div>
-      <div class="brand">Soren&rsquo;s<br>Sourdough<span class="swirl"></span></div>
+      <div class="eyebrow"><span class="pill">Brutet Bröd · Bread for the Table</span></div>
+      <div class="brand">Communion<br>Breads<span class="swirl"></span><span class="by">by Soren Deorlow</span></div>
       <div class="madeby">
-        <strong>Made with care in La Costa Oaks</strong>
-        Swedish craft in every crumb.
-        <span class="tack">Tack så mycket</span>
+        <span class="tagline">Bread for your table,<br>baked for <span class="you">you</span>.</span>
+        <span class="where">Made with care in La Costa Oaks</span>
       </div>
       <div class="qr-block">
         <div class="qr" data-qr></div>
@@ -303,12 +316,11 @@
     </div>
 
     <div class="label">
-      <div class="eyebrow">Hand-baked · Levain</div>
-      <div class="brand">Soren&rsquo;s<br>Sourdough<span class="swirl"></span></div>
+      <div class="eyebrow"><span class="pill">Brutet Bröd · Bread for the Table</span></div>
+      <div class="brand">Communion<br>Breads<span class="swirl"></span><span class="by">by Soren Deorlow</span></div>
       <div class="madeby">
-        <strong>Made with care in La Costa Oaks</strong>
-        Swedish craft in every crumb.
-        <span class="tack">Tack så mycket</span>
+        <span class="tagline">Bread for your table,<br>baked for <span class="you">you</span>.</span>
+        <span class="where">Made with care in La Costa Oaks</span>
       </div>
       <div class="qr-block">
         <div class="qr" data-qr></div>
