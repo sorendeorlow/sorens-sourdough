@@ -106,3 +106,37 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 1;
   transform: none;
 }
+
+/* ===========================================
+   Email signup popup
+   =========================================== */
+.signup-modal.hidden { display: none !important; }
+.signup-modal .signup-overlay {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.signup-modal .signup-card {
+  opacity: 0;
+  transform: translateY(14px) scale(.98);
+  transition: opacity .35s ease, transform .45s cubic-bezier(.2, .8, .2, 1);
+  box-shadow: 0 40px 80px -20px rgba(74, 55, 40, 0.35);
+}
+.signup-modal.is-open .signup-overlay { opacity: 1; }
+.signup-modal.is-open .signup-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.signup-wheat { color: var(--crust); }
+
+/* sr-only utility (in case Tailwind reset misses it) */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

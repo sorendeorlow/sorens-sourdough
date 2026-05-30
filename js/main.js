@@ -195,4 +195,127 @@
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
   }
 
+  /* ---------- Email signup popup ---------- */
+  const signupModal = document.getElementById('signup-modal');
+  if (signupModal) {
+    const STORAGE_KEY  = 'cb_signup_state';
+    const COOLDOWN_MS  = 30 * 24 * 60 * 60 * 1000; // 30 days
+    const DELAY_MS     = 12000;
+    const SCROLL_RATIO = 0.35;
+
+    const readState = () => {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+      catch { return {}; }
+    };
+    const writeState = (patch) => {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...readState(), ...patch })); }
+      catch { /* ignore quota / private mode */ }
+    };
+
+    const state = readState();
+    const subscribed = !!state.subscribed;
+    const recentlyDismissed = state.dismissedAt && (Date.now() - state.dismissedAt) < COOLDOWN_MS;
+
+    if (!subscribed && !recentlyDismissed) {
+      const body       = signupModal.querySelector('.signup-body');
+      const thanks     = signupModal.querySelector('.signup-thanks');
+      const form       = document.getElementById('signup-form');
+      const emailInput = document.getElementById('signup-email');
+      const submitBtn  = form && form.querySelector('button[type="submit"]');
+      const feedback   = document.getElementById('signup-feedback');
+      let opened = false;
+      let lastFocus = null;
+
+      const open = () => {
+        if (opened) return;
+        opened = true;
+        lastFocus = document.activeElement;
+        signupModal.classList.remove('hidden');
+        signupModal.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(() => signupModal.classList.add('is-open'));
+        document.body.style.overflow = 'hidden';
+        if (emailInput) setTimeout(() => emailInput.focus(), 300);
+        cleanupTriggers();
+      };
+
+      const close = (markDismissed) => {
+        signupModal.classList.remove('is-open');
+        signupModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        setTimeout(() => signupModal.classList.add('hidden'), 300);
+        if (markDismissed) writeState({ dismissedAt: Date.now() });
+        if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      };
+
+      signupModal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-signup-close]')) close(!readState().subscribed);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && opened && !signupModal.classList.contains('hidden')) {
+          close(!readState().subscribed);
+        }
+      });
+
+      const delayTimer = setTimeout(open, DELAY_MS);
+
+      const onScroll = () => {
+        const doc = document.documentElement;
+        const ratio = (window.scrollY + window.innerHeight) / doc.scrollHeight;
+        if (ratio > SCROLL_RATIO) open();
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      const onExitIntent = (e) => { if (e.clientY <= 0) open(); };
+      const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+      if (isDesktop) document.addEventListener('mouseleave', onExitIntent);
+
+      function cleanupTriggers() {
+        clearTimeout(delayTimer);
+        window.removeEventListener('scroll', onScroll);
+        if (isDesktop) document.removeEventListener('mouseleave', onExitIntent);
+      }
+
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const email = (emailInput?.value || '').trim();
+          if (!email) return;
+
+          const action = form.getAttribute('action') || '';
+          const isDemo = action.includes('YOUR_NEWSLETTER_FORM_ID');
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+          }
+          if (feedback) { feedback.classList.add('hidden'); feedback.textContent = ''; }
+
+          try {
+            if (!isDemo) {
+              const res = await fetch(action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { Accept: 'application/json' }
+              });
+              if (!res.ok) throw new Error('submit failed');
+            }
+            writeState({ subscribed: true, subscribedAt: Date.now() });
+            if (body)   body.classList.add('hidden');
+            if (thanks) thanks.classList.remove('hidden');
+          } catch (err) {
+            if (feedback) {
+              feedback.textContent = 'Hmm — that didn’t go through. Try again in a moment, or email soren directly.';
+              feedback.classList.remove('hidden');
+              feedback.classList.add('bg-crust/10', 'text-crust');
+            }
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Save me a slice';
+            }
+          }
+        });
+      }
+    }
+  }
+
 })();

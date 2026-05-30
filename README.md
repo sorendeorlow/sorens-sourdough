@@ -60,6 +60,17 @@ The order form on `order.html` is wired for [Formspree](https://formspree.io).
 
 Until that's configured, the form runs in **demo mode** (it validates and shows a confirmation but doesn't actually send anything).
 
+## Setting up the newsletter popup
+
+The homepage popup (`index.html`) collects email addresses through Formspree too. It appears after 12 seconds, when a visitor scrolls past ~35% of the page, or on desktop exit-intent — whichever comes first. Dismissed visitors won't see it again for 30 days; subscribers never see it again (state stored in `localStorage` under `cb_signup_state`).
+
+1. Create a second Formspree form for newsletter signups (separate from the order form so they don't co-mingle).
+2. Replace `YOUR_NEWSLETTER_FORM_ID` in `index.html`:
+   ```html
+   <form id="signup-form" action="https://formspree.io/f/YOUR_NEWSLETTER_FORM_ID" ...>
+   ```
+3. Until configured, the popup runs in **demo mode** (shows the thank-you state without actually sending).
+
 ## Updating photos
 
 All photos live in `assets/images/`. To swap:

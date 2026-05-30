@@ -476,6 +476,71 @@
     </figure>
   </div>
 
+  <!-- ================= EMAIL SIGNUP POPUP ================= -->
+  <div id="signup-modal" class="signup-modal hidden fixed inset-0 z-[60] flex items-center justify-center px-5 py-8"
+       role="dialog" aria-modal="true" aria-labelledby="signup-heading" aria-hidden="true">
+    <div class="signup-overlay absolute inset-0 bg-brown/70" data-signup-close></div>
+
+    <div class="signup-card relative w-full max-w-md bg-cream rounded-3xl px-8 py-10 md:px-10 md:py-12 shadow-2xl">
+      <button type="button" class="signup-close absolute top-4 right-4 w-9 h-9 rounded-full text-brown/60 hover:text-brown hover:bg-brown/5 text-2xl leading-none flex items-center justify-center transition-colors"
+              data-signup-close aria-label="Close signup">&times;</button>
+
+      <div class="signup-body">
+        <svg class="signup-wheat mb-4" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2v20"/>
+          <path d="M12 6c-3 0-5 1.5-5 4 2.5 0 5-1.5 5-4z"/>
+          <path d="M12 6c3 0 5 1.5 5 4-2.5 0-5-1.5-5-4z"/>
+          <path d="M12 11c-3 0-5 1.5-5 4 2.5 0 5-1.5 5-4z"/>
+          <path d="M12 11c3 0 5 1.5 5 4-2.5 0-5-1.5-5-4z"/>
+          <path d="M12 16c-3 0-5 1.5-5 4 2.5 0 5-1.5 5-4z"/>
+          <path d="M12 16c3 0 5 1.5 5 4-2.5 0-5-1.5-5-4z"/>
+        </svg>
+
+        <span class="text-[11px] font-medium tracking-[0.24em] uppercase text-swedish block mb-3">When the oven&rsquo;s hot</span>
+        <h2 id="signup-heading" class="font-display text-[30px] md:text-[32px] leading-[1.08] tracking-tight text-brown mb-3">
+          Be the <em class="not-italic text-crust">first</em> at the table.
+        </h2>
+        <p class="text-[14.5px] leading-relaxed text-brown-soft mb-6">
+          A short note from Soren when a fresh bake is on the schedule &mdash; sourdough, rye, holiday loaves, the occasional pastry. One email per batch. Never shared.
+        </p>
+
+        <form id="signup-form" class="flex flex-col gap-3"
+              action="https://formspree.io/f/YOUR_NEWSLETTER_FORM_ID" method="POST" novalidate>
+          <label for="signup-email" class="sr-only">Email address</label>
+          <input id="signup-email" name="email" type="email" required autocomplete="email"
+                 placeholder="you@somewhere.com"
+                 class="font-sans text-[15px] px-4 py-3 rounded-md border border-brown/15 bg-white text-brown placeholder:text-brown-soft/50 focus:outline-none focus:border-swedish transition-colors" />
+          <input type="hidden" name="_subject" value="New Communion Breads subscriber" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+          <button type="submit"
+                  class="signup-btn font-sans text-[13px] font-medium tracking-[0.14em] uppercase px-5 py-3.5 rounded-md bg-brown text-cream hover:bg-swedish transition-colors disabled:opacity-70 disabled:cursor-wait">
+            Save me a slice
+          </button>
+        </form>
+
+        <p class="text-[11px] text-brown-soft/70 text-center mt-3 tracking-wide">
+          You can unsubscribe anytime.
+        </p>
+        <p id="signup-feedback" class="hidden mt-3 px-3 py-2 rounded-md text-[13px]"></p>
+      </div>
+
+      <div class="signup-thanks hidden text-center">
+        <svg class="mx-auto mb-3 text-crust" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+        <span class="text-[11px] font-medium tracking-[0.24em] uppercase text-swedish block mb-3">You&rsquo;re on the list</span>
+        <h2 class="font-display text-[30px] leading-tight tracking-tight text-brown mb-3">Tack så mycket.</h2>
+        <p class="text-[14.5px] leading-relaxed text-brown-soft mb-6">
+          We&rsquo;ll write when the next loaf is on the schedule. Until then &mdash; good bread, good company.
+        </p>
+        <button type="button" data-signup-close
+                class="font-sans text-[13px] font-medium tracking-[0.14em] uppercase px-5 py-3 rounded-md border border-brown text-brown hover:bg-brown hover:text-cream transition-colors">
+          Back to the bakery
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/main.js" defer></script>
 </body>
 </html>
