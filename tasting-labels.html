@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tasting Labels — Communion Breads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --beige:   #F5F0E8;
+      --cream:   #FAF7F2;
+      --brown:   #4A3728;
+      --soft:    #6B5340;
+      --swedish: #2A5C8A;
+      --crust:   #B98655;
+      --honey:   #D9A878;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--brown);
+      background: var(--beige);
+    }
+
+    .screen-shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 64px;
+    }
+
+    .screen-shell header {
+      max-width: 620px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .screen-shell h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 28px;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    .screen-shell p {
+      color: var(--soft);
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0 0 18px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    .controls button {
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 9px 16px;
+      border: 1px solid var(--brown);
+      background: transparent;
+      color: var(--brown);
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .controls button.is-active {
+      background: var(--brown);
+      color: var(--cream);
+    }
+    .controls .print-btn {
+      background: var(--brown);
+      color: var(--cream);
+      margin-left: 14px;
+    }
+    .controls .print-btn:hover {
+      background: var(--swedish);
+      border-color: var(--swedish);
+    }
+
+    .qr-input-row {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--soft);
+      text-align: center;
+    }
+    .qr-input-row input {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      padding: 6px 10px;
+      border: 1px solid #d4c8b3;
+      border-radius: 2px;
+      min-width: 320px;
+      color: var(--brown);
+      background: var(--cream);
+    }
+
+    /* ---- The sheet & label ---- */
+
+    .sheet {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .label {
+      width: 4in;
+      height: 3in;
+      background: var(--cream);
+      color: var(--brown);
+      border: 1px solid #e6dccb;
+      position: relative;
+      padding: 0.28in 0.32in;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto 1fr auto;
+      column-gap: 0.22in;
+      row-gap: 0.06in;
+      overflow: hidden;
+    }
+
+    /* Variety accent stripe down the left edge */
+    .label::after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      width: 0.08in;
+      background: var(--accent, var(--swedish));
+    }
+
+    /* twine hole indicator */
+    .label::before {
+      content: "";
+      position: absolute;
+      top: 0.22in;
+      left: 0.22in;
+      width: 0.16in;
+      height: 0.16in;
+      border-radius: 50%;
+      border: 1.2px solid var(--brown);
+      background: var(--beige);
+    }
+
+    .label .eyebrow {
+      grid-column: 1 / 3;
+      grid-row: 1 / 2;
+      padding-left: 0.34in;
+      margin-bottom: 0.04in;
+    }
+    .label .eyebrow .pill {
+      display: inline-block;
+      background: #111;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 6.5px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 4px 8px 3px;
+    }
+
+    .label .brand {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+      padding-left: 0.04in;
+      font-family: 'Fraunces', serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: -0.008em;
+      color: var(--brown);
+      line-height: 1;
+    }
+    .label .brand .by {
+      display: inline-block;
+      margin-left: 5px;
+      font-family: 'Inter', sans-serif;
+      font-size: 6.5px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .label .variety {
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+      align-self: center;
+      padding-left: 0.04in;
+    }
+    .label .variety .name {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 21px;
+      line-height: 1;
+      letter-spacing: -0.015em;
+      color: var(--brown);
+    }
+    .label .variety .swirl {
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--accent, var(--crust));
+      margin: 8px 0 8px;
+    }
+    .label .variety .blurb {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 10.5px;
+      line-height: 1.25;
+      color: var(--brown);
+      margin-bottom: 2px;
+    }
+    .label .variety .blurb .accent {
+      color: var(--accent, var(--crust));
+      font-style: normal;
+    }
+
+    .label .footer {
+      grid-column: 1 / 2;
+      grid-row: 4 / 5;
+      padding-left: 0.04in;
+      font-size: 7.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--swedish);
+      align-self: end;
+    }
+    .label .footer .quarter {
+      display: block;
+      color: var(--soft);
+      letter-spacing: 0.18em;
+      margin-bottom: 3px;
+    }
+
+    .label .qr-block {
+      grid-column: 2 / 3;
+      grid-row: 2 / 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding-top: 0.04in;
+    }
+    .label .qr {
+      width: 1.05in;
+      height: 1.05in;
+      padding: 4px;
+      background: var(--cream);
+      border: 1px solid #e6dccb;
+    }
+    .label .qr img,
+    .label .qr canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+    .label .qr-caption {
+      font-size: 6.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-top: 3px;
+      text-align: center;
+      max-width: 1.1in;
+      line-height: 1.35;
+    }
+    .label .qr-caption strong {
+      display: block;
+      color: var(--brown);
+      font-weight: 600;
+      margin-bottom: 1px;
+    }
+
+    /* Variety theming */
+    .label[data-variety="country"]  { --accent: var(--swedish); }
+    .label[data-variety="heritage"] { --accent: var(--honey); }
+
+    /* ---- Print ---- */
+    @page {
+      size: letter;
+      margin: 0.5in;
+    }
+
+    @media print {
+      html, body { background: white; }
+      .screen-shell { padding: 0; }
+      .screen-shell header, .controls, .qr-input-row { display: none; }
+      .sheet {
+        margin: 0;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.25in;
+      }
+      .label {
+        border: 1px dashed #d4c8b3;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="screen-shell">
+  <header>
+    <h1>Tasting Labels — Quarter Loaves</h1>
+    <p>Four 4×3″ hang-tags per US Letter sheet for sample loaves you&rsquo;re handing out for feedback. The QR sends tasters straight to the review form on the home page.</p>
+
+    <div class="controls">
+      <button id="mix-default" class="is-active" onclick="setMix('default')">2 of each</button>
+      <button id="mix-country" onclick="setMix('country')">All Country Levain</button>
+      <button id="mix-heritage" onclick="setMix('heritage')">All Heritage Wheat</button>
+      <button class="print-btn" onclick="window.print()">Print sheet</button>
+    </div>
+
+    <div class="qr-input-row">
+      QR target:
+      <input id="qr-input" type="url" value="https://sorendeorlow.github.io/sorens-sourdough/#review-form" onchange="renderAll(this.value)">
+    </div>
+  </header>
+
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<template id="label-country">
+  <div class="label" data-variety="country">
+    <div class="eyebrow"><span class="pill">Brutet Bröd · Tasting Loaf</span></div>
+    <div class="brand">Communion Breads<span class="by">by Soren Deorlow</span></div>
+    <div class="variety">
+      <span class="name">Country Levain</span>
+      <span class="swirl"></span>
+      <span class="blurb">A small taste — we&rsquo;d love <span class="accent">yours.</span></span>
+      <span class="blurb" style="font-style:normal;font-weight:400;font-family:'Inter',sans-serif;font-size:9px;color:var(--soft);line-height:1.4;">Scan the code, share a sentence or two about how it landed.</span>
+    </div>
+    <div class="footer">
+      <span class="quarter">Quarter loaf · For tasting</span>
+      Made with care in La Costa Oaks
+    </div>
+    <div class="qr-block">
+      <div class="qr" data-qr></div>
+      <div class="qr-caption">
+        <strong>Scan to leave</strong>
+        a short review
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="label-heritage">
+  <div class="label" data-variety="heritage">
+    <div class="eyebrow"><span class="pill">Brutet Bröd · Tasting Loaf</span></div>
+    <div class="brand">Communion Breads<span class="by">by Soren Deorlow</span></div>
+    <div class="variety">
+      <span class="name">Heritage Wheat<br>&amp; Wildflower Honey</span>
+      <span class="swirl"></span>
+      <span class="blurb">A small taste — we&rsquo;d love <span class="accent">yours.</span></span>
+      <span class="blurb" style="font-style:normal;font-weight:400;font-family:'Inter',sans-serif;font-size:9px;color:var(--soft);line-height:1.4;">Scan the code, share a sentence or two about how it landed.</span>
+    </div>
+    <div class="footer">
+      <span class="quarter">Quarter loaf · For tasting</span>
+      Made with care in La Costa Oaks
+    </div>
+    <div class="qr-block">
+      <div class="qr" data-qr></div>
+      <div class="qr-caption">
+        <strong>Scan to leave</strong>
+        a short review
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  const sheet = document.getElementById('sheet');
+  const tplCountry = document.getElementById('label-country');
+  const tplHeritage = document.getElementById('label-heritage');
+
+  function buildLayout(mix) {
+    sheet.innerHTML = '';
+    let order;
+    if (mix === 'country')  order = ['c','c','c','c'];
+    else if (mix === 'heritage') order = ['h','h','h','h'];
+    else order = ['c','h','c','h']; // 2 of each, alternating for variety on the page
+    order.forEach(v => {
+      const node = (v === 'c' ? tplCountry : tplHeritage).content.cloneNode(true);
+      sheet.appendChild(node);
+    });
+    renderAll(document.getElementById('qr-input').value);
+  }
+
+  function setMix(mix) {
+    ['default','country','heritage'].forEach(k => {
+      const btn = document.getElementById('mix-' + k);
+      if (btn) btn.classList.toggle('is-active', k === mix);
+    });
+    buildLayout(mix);
+  }
+
+  function renderAll(url) {
+    document.querySelectorAll('[data-qr]').forEach(el => {
+      el.innerHTML = '';
+      new QRCode(el, {
+        text: url,
+        width: 220,
+        height: 220,
+        colorDark: '#4A3728',
+        colorLight: '#FAF7F2',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    });
+  }
+
+  buildLayout('default');
+</script>
+
+</body>
+</html>
