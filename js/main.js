@@ -195,6 +195,53 @@
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
   }
 
+  /* ---------- Review submission form ---------- */
+  const reviewForm = document.getElementById('review-form');
+  if (reviewForm) {
+    const reviewFeedback = document.getElementById('review-feedback');
+    const reviewBtn = reviewForm.querySelector('button[type="submit"]');
+
+    const setReviewFeedback = (msg, kind) => {
+      if (!reviewFeedback) return;
+      reviewFeedback.textContent = msg;
+      reviewFeedback.classList.remove('hidden', 'bg-swedish/10', 'text-swedish', 'bg-crust/10', 'text-crust');
+      reviewFeedback.classList.add(kind === 'success' ? 'bg-swedish/10' : 'bg-crust/10');
+      reviewFeedback.classList.add(kind === 'success' ? 'text-swedish' : 'text-crust');
+    };
+
+    reviewForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const action = reviewForm.getAttribute('action') || '';
+      const isDemo = action.includes('YOUR_REVIEW_FORM_ID');
+
+      if (reviewBtn) {
+        reviewBtn.disabled = true;
+        reviewBtn.textContent = 'Sending…';
+      }
+      if (reviewFeedback) reviewFeedback.classList.add('hidden');
+
+      try {
+        if (!isDemo) {
+          const res = await fetch(action, {
+            method: 'POST',
+            body: new FormData(reviewForm),
+            headers: { Accept: 'application/json' }
+          });
+          if (!res.ok) throw new Error('submit failed');
+        }
+        setReviewFeedback('Thank you — your note is on its way to Soren. Tack så mycket.', 'success');
+        reviewForm.reset();
+      } catch (err) {
+        setReviewFeedback('Hmm — that didn’t go through. Try again, or email soren directly.', 'error');
+      } finally {
+        if (reviewBtn) {
+          reviewBtn.disabled = false;
+          reviewBtn.textContent = 'Share your note';
+        }
+      }
+    });
+  }
+
   /* ---------- Email signup popup ---------- */
   const signupModal = document.getElementById('signup-modal');
   if (signupModal) {

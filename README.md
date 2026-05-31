@@ -71,6 +71,17 @@ The homepage popup (`index.html`) collects email addresses through Formspree too
    ```
 3. Until configured, the popup runs in **demo mode** (shows the thank-you state without actually sending).
 
+## Setting up the review form
+
+The home page has a "Tried a loaf? Tell us how it went." form directly under the testimonials. Submissions land in a third Formspree inbox so Soren can curate which notes get promoted into the visible quote grid.
+
+1. Create a third Formspree form (e.g. `Communion Breads — Reviews`).
+2. Replace `YOUR_REVIEW_FORM_ID` in `index.html`:
+   ```html
+   <form id="review-form" action="https://formspree.io/f/YOUR_REVIEW_FORM_ID" ...>
+   ```
+3. Submissions include: `name`, `email` (private), `rating` (1–5), `review` text, and `publish_ok` (whether the reviewer consented to publishing their first name + last initial).
+
 ## Updating photos
 
 All photos live in `assets/images/`. To swap:

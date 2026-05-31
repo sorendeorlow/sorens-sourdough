@@ -299,6 +299,77 @@
             <figcaption class="text-sm font-medium tracking-[0.18em] uppercase text-brown-soft">— Yasmine D.</figcaption>
           </figure>
         </div>
+
+        <!-- Leave a review -->
+        <div class="max-w-2xl mx-auto mt-20 md:mt-24">
+          <div class="text-center mb-8">
+            <span class="text-xs font-medium tracking-[0.2em] uppercase text-swedish">Add your voice</span>
+            <h3 class="font-display text-3xl md:text-4xl mt-3 leading-tight">Tried a loaf? <em class="not-italic text-crust">Tell us how it went.</em></h3>
+            <p class="text-sm text-brown-soft mt-3 leading-relaxed">A short note, a long one, anything in between. With your okay, we may share it here so future neighbors can hear from you too.</p>
+          </div>
+
+          <form id="review-form" class="bg-cream rounded-2xl p-6 md:p-8 space-y-4"
+                action="https://formspree.io/f/YOUR_REVIEW_FORM_ID" method="POST" novalidate>
+
+            <!-- Star rating -->
+            <fieldset class="text-center">
+              <legend class="text-[11px] font-medium tracking-[0.22em] uppercase text-brown-soft mb-2">Your rating</legend>
+              <div class="review-stars inline-flex flex-row-reverse gap-1.5" role="radiogroup" aria-label="Your rating, from 1 to 5 stars">
+                <input type="radio" id="rev-star-5" name="rating" value="5" class="sr-only peer/5" />
+                <label for="rev-star-5" class="review-star" title="5 stars" aria-label="5 stars">★</label>
+                <input type="radio" id="rev-star-4" name="rating" value="4" class="sr-only peer/4" />
+                <label for="rev-star-4" class="review-star" title="4 stars" aria-label="4 stars">★</label>
+                <input type="radio" id="rev-star-3" name="rating" value="3" class="sr-only peer/3" />
+                <label for="rev-star-3" class="review-star" title="3 stars" aria-label="3 stars">★</label>
+                <input type="radio" id="rev-star-2" name="rating" value="2" class="sr-only peer/2" />
+                <label for="rev-star-2" class="review-star" title="2 stars" aria-label="2 stars">★</label>
+                <input type="radio" id="rev-star-1" name="rating" value="1" class="sr-only peer/1" />
+                <label for="rev-star-1" class="review-star" title="1 star" aria-label="1 star">★</label>
+              </div>
+            </fieldset>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="rev-name" class="sr-only">Your name</label>
+                <input id="rev-name" name="name" type="text" required autocomplete="name"
+                       placeholder="Your name"
+                       class="w-full font-sans text-[15px] px-4 py-3 rounded-md border border-brown/15 bg-white text-brown placeholder:text-brown-soft/50 focus:outline-none focus:border-swedish transition-colors" />
+              </div>
+              <div>
+                <label for="rev-email" class="sr-only">Email (kept private)</label>
+                <input id="rev-email" name="email" type="email" required autocomplete="email"
+                       placeholder="Email (kept private)"
+                       class="w-full font-sans text-[15px] px-4 py-3 rounded-md border border-brown/15 bg-white text-brown placeholder:text-brown-soft/50 focus:outline-none focus:border-swedish transition-colors" />
+              </div>
+            </div>
+
+            <div>
+              <label for="rev-text" class="sr-only">Your note</label>
+              <textarea id="rev-text" name="review" rows="5" required minlength="10"
+                        placeholder="What did you taste, smell, feel? How did it land at your table?"
+                        class="w-full font-sans text-[15px] px-4 py-3 rounded-md border border-brown/15 bg-white text-brown placeholder:text-brown-soft/50 focus:outline-none focus:border-swedish transition-colors resize-y leading-relaxed"></textarea>
+            </div>
+
+            <label class="flex items-start gap-3 text-[13px] text-brown-soft cursor-pointer select-none">
+              <input type="checkbox" name="publish_ok" value="yes" checked
+                     class="mt-1 w-4 h-4 accent-swedish flex-shrink-0" />
+              <span>Okay to share my first name + last initial on the site. (Email stays private.)</span>
+            </label>
+
+            <input type="hidden" name="_subject" value="New review for Communion Breads" />
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-2">
+              <p class="text-[11px] text-brown-soft/70 tracking-wide">We&rsquo;ll never share your email.</p>
+              <button type="submit"
+                      class="font-sans text-[13px] font-medium tracking-[0.14em] uppercase px-6 py-3 rounded-md bg-brown text-cream hover:bg-swedish transition-colors disabled:opacity-70 disabled:cursor-wait">
+                Share your note
+              </button>
+            </div>
+
+            <p id="review-feedback" class="hidden mt-2 px-3 py-2 rounded-md text-[13px]"></p>
+          </form>
+        </div>
       </div>
     </section>
 

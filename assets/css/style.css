@@ -130,6 +130,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .signup-wheat { color: var(--crust); }
 
+/* ===========================================
+   Review form — star rating
+   =========================================== */
+.review-star {
+  font-size: 32px;
+  line-height: 1;
+  color: rgba(74, 55, 40, 0.18);
+  cursor: pointer;
+  transition: color .15s ease, transform .15s ease;
+  user-select: none;
+}
+/* Hover: light up the hovered star and all stars after it (which are earlier in DOM due to row-reverse) */
+.review-stars:hover .review-star { color: rgba(185, 134, 85, 0.35); }
+.review-stars .review-star:hover,
+.review-stars .review-star:hover ~ .review-star {
+  color: var(--crust);
+  transform: scale(1.05);
+}
+/* Checked state: the checked input precedes its label and all earlier stars (higher values) in DOM, so use sibling selector */
+.review-stars input:checked ~ .review-star { color: var(--crust); }
+.review-stars input:focus-visible + .review-star {
+  outline: 2px solid var(--swedish);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 /* sr-only utility (in case Tailwind reset misses it) */
 .sr-only {
   position: absolute;
