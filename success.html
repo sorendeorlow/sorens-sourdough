@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmed — Communion Breads</title>
+  <meta name="theme-color" content="#4A3728" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9E%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            beige:   '#F5F0E8',
+            cream:   '#FAF7F2',
+            brown:   '#4A3728',
+            'brown-soft': '#6B5340',
+            swedish: '#2A5C8A',
+            crust:   '#B98655',
+          },
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            body:    ['Inter', 'system-ui', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Stripe.js -->
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body class="font-body bg-cream text-brown antialiased">
+
+  <header class="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-beige">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+      <a href="index.html" class="group block leading-none">
+        <span class="font-display text-[22px] md:text-[26px] text-brown group-hover:text-swedish transition-colors tracking-tight block">Communion Breads</span>
+        <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-brown-soft/70 mt-1.5 block">by Soren Deorlow</span>
+      </a>
+      <a href="index.html" class="text-sm font-medium text-swedish hover:underline">Back to home</a>
+    </nav>
+  </header>
+
+  <main class="pt-28 pb-20">
+    <div class="max-w-2xl mx-auto px-6 text-center">
+
+      <!-- Success Icon -->
+      <div class="mx-auto mb-8 w-20 h-20 rounded-full bg-crust/10 flex items-center justify-center">
+        <svg class="w-10 h-10 text-crust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+      </div>
+
+      <h1 class="font-display text-5xl md:text-6xl leading-tight">Thank you.</h1>
+      <p class="mt-4 text-2xl text-brown-soft">Your order has been placed and paid for.</p>
+
+      <div class="my-10 h-px bg-beige"></div>
+
+      <div class="text-left max-w-md mx-auto space-y-6 text-[15px] text-brown-soft leading-relaxed">
+        <p>
+          We’ve received your order and payment. Your loaves will be baked fresh the morning of your pickup date and will be ready between <strong class="text-brown">3–6 PM</strong>.
+        </p>
+        <p>
+          You’ll receive a confirmation email shortly with your pickup details. We’ll also send a reminder the day before.
+        </p>
+        <p>
+          If you have any questions before then, just reply to the confirmation email or reach us at <a href="mailto:hello@sorenssourdough.com" class="text-swedish underline">hello@sorenssourdough.com</a>.
+        </p>
+      </div>
+
+      <div class="mt-12">
+        <a href="index.html" 
+           class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-brown text-cream font-medium hover:bg-swedish transition-colors">
+          Back to Communion Breads
+        </a>
+      </div>
+
+      <p class="mt-8 text-xs text-brown-soft/60 tracking-wider">
+        We’re grateful to have a place at your table.
+      </p>
+
+      <!-- Dynamic Stripe Payment Details (populated via Stripe.js) -->
+      <div id="stripe-details" class="mt-12 hidden max-w-md mx-auto">
+        <div class="bg-beige rounded-2xl p-6 text-left">
+          <div class="text-xs tracking-[0.18em] uppercase text-crust mb-3">Payment Confirmed</div>
+          
+          <div class="flex justify-between items-baseline mb-4">
+            <span class="text-brown-soft">Total paid</span>
+            <span id="stripe-amount" class="font-display text-3xl text-brown"></span>
+          </div>
+
+          <div class="border-t border-beige pt-4 text-sm space-y-1 text-brown-soft">
+            <div id="stripe-email-row" class="hidden">
+              <span class="text-brown">Email:</span> 
+              <span id="stripe-email" class="text-brown"></span>
+            </div>
+            <div id="stripe-status-row">
+              <span class="text-brown">Status:</span> 
+              <span id="stripe-status" class="text-crust font-medium">Paid</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="border-t border-beige py-8 text-center text-xs text-brown-soft/60">
+    Communion Breads · Aviara &amp; La Costa, Carlsbad
+  </footer>
+
+  <script>
+    // Stripe Publishable Key (live)
+    const STRIPE_PUBLISHABLE_KEY = 'pk_live_51SnpsDC8tP5ebWZqmTrlrvGgHTcwgBLS9joFWo7ARA5ltBk99XMTjG0Enm4svsgkQmLw6Tx4NbdDeAIFOj4oqL6m00Zr7sLxoH';
+
+    function initStripeConfirmation() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get('session_id');
+
+      if (!sessionId) {
+        // No session ID — user probably visited directly. Keep generic message.
+        return;
+      }
+
+      const detailsContainer = document.getElementById('stripe-details');
+      if (!detailsContainer) return;
+
+      detailsContainer.classList.remove('hidden');
+
+      try {
+        const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+
+        stripe.retrieveCheckoutSession(sessionId).then((session) => {
+          if (!session) {
+            detailsContainer.innerHTML = '<p class="text-sm text-brown-soft">We couldn’t load your payment details, but your order was received.</p>';
+            return;
+          }
+
+          // Amount
+          const amountEl = document.getElementById('stripe-amount');
+          if (amountEl && session.amount_total) {
+            const dollars = (session.amount_total / 100).toFixed(2);
+            amountEl.textContent = '$' + dollars;
+          }
+
+          // Email
+          const emailRow = document.getElementById('stripe-email-row');
+          const emailEl = document.getElementById('stripe-email');
+          if (emailRow && emailEl && session.customer_email) {
+            emailEl.textContent = session.customer_email;
+            emailRow.classList.remove('hidden');
+          }
+
+          // Status
+          const statusEl = document.getElementById('stripe-status');
+          if (statusEl) {
+            if (session.payment_status === 'paid') {
+              statusEl.textContent = 'Paid successfully';
+              statusEl.className = 'text-crust font-medium';
+            } else {
+              statusEl.textContent = session.payment_status || 'Processed';
+            }
+          }
+        }).catch((err) => {
+          console.error('Stripe session retrieval error:', err);
+          // Graceful fallback — don't break the page
+          const amountEl = document.getElementById('stripe-amount');
+          if (amountEl) amountEl.textContent = 'See receipt in email';
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // Initialize when page loads
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initStripeConfirmation);
+    } else {
+      initStripeConfirmation();
+    }
+  </script>
+
+</body>
+</html>

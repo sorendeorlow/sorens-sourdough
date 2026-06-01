@@ -127,7 +127,11 @@
     }
 
     // Submit via fetch to Formspree (or graceful fallback)
+    // NOTE: This legacy handler is disabled when the new Stripe flow is active on the page.
+    const hasStripeFlow = document.getElementById('submit-btn') && 
+                          document.querySelector('script[src*="js.stripe.com"]');
     orderForm.addEventListener('submit', async (e) => {
+      if (hasStripeFlow) return; // Let the inline Stripe handler take over
       // Basic validation: at least one loaf
       let totalQty = 0;
       qtyInputs.forEach((i) => totalQty += parseInt(i.value, 10) || 0);

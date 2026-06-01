@@ -6,7 +6,7 @@
   <title>Order — Soren's Sourdough</title>
   <meta name="description" content="Pre-order your hand-crafted sourdough loaf — full or half, multiple varieties. Baked fresh on your pickup day." />
   <meta name="theme-color" content="#4A3728" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9E%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23B98655' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='50' y1='92' x2='50' y2='15'/%3E%3Cpath d='M50 20 Q40 26 42 35'/%3E%3Cpath d='M50 32 Q38 40 41 52'/%3E%3Cpath d='M50 46 Q36 55 40 68'/%3E%3Cpath d='M50 20 Q60 26 58 35'/%3E%3Cpath d='M50 32 Q62 40 59 52'/%3E%3Cpath d='M50 46 Q64 55 60 68'/%3E%3Cpath d='M50 15 Q47 8 50 3 Q53 8 50 15'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -19,6 +19,10 @@
     } } }
   </script>
   <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- Stripe.js -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <!-- Publishable key is used on success.html for order confirmation display -->
 </head>
 <body class="font-body bg-cream text-brown antialiased">
 
@@ -32,6 +36,7 @@
         <li><a href="index.html"   class="nav-link">Home</a></li>
         <li><a href="about.html"   class="nav-link">About</a></li>
         <li><a href="loaves.html"  class="nav-link">Breads</a></li>
+        <li><a href="your-table.html" class="nav-link">For Your Table</a></li>
         <li><a href="process.html" class="nav-link">The Process</a></li>
         <li><a href="order.html"   class="ml-3 px-5 py-2.5 rounded-full bg-swedish text-cream hover:bg-brown transition-colors text-[13px] tracking-wide">Order</a></li>
       </ul>
@@ -44,6 +49,7 @@
         <li><a href="index.html"   class="block py-3 border-b border-beige">Home</a></li>
         <li><a href="about.html"   class="block py-3 border-b border-beige">About</a></li>
         <li><a href="loaves.html"  class="block py-3 border-b border-beige">Breads</a></li>
+        <li><a href="your-table.html" class="block py-3 border-b border-beige">For Your Table</a></li>
         <li><a href="process.html" class="block py-3 border-b border-beige">The Process</a></li>
         <li><a href="order.html"   class="block py-3 text-swedish font-semibold">Order →</a></li>
       </ul>
@@ -56,13 +62,24 @@
       <div class="max-w-4xl mx-auto px-6 lg:px-10 text-center">
         <span class="text-xs font-medium tracking-[0.2em] uppercase text-swedish">Beställ · Place an Order</span>
         <h1 class="font-display text-5xl md:text-6xl lg:text-7xl mt-5 leading-[1.05]">Order a loaf</h1>
-        <p class="mt-6 text-brown-soft text-lg max-w-2xl mx-auto">Pre-order only — baked fresh to order. Choose your loaves, pick a date, and we'll handle the rest.</p>
+        <p class="mt-6 text-brown-soft text-lg max-w-2xl mx-auto">Pre-order and pay online. Your loaves are baked fresh the morning of pickup from our home kitchen in Aviara &amp; La Costa.</p>
       </div>
     </section>
 
     <!-- FORM + INFO -->
     <section class="py-16 md:py-24">
       <div class="max-w-6xl mx-auto px-6 lg:px-10 grid lg:grid-cols-3 gap-10 lg:gap-16">
+
+        <!-- Profile Handoff Banner (only shows when coming from your-table.html) -->
+        <div id="profile-handoff" class="lg:col-span-3 mb-4 hidden">
+          <div class="bg-beige rounded-2xl px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-4">
+            <div class="flex-1">
+              <span class="text-xs font-medium tracking-[0.18em] uppercase text-crust">From your table profile</span>
+              <p id="handoff-recommendation" class="font-display text-xl mt-1 leading-tight"></p>
+            </div>
+            <button onclick="clearProfileHandoff()" class="text-xs px-4 py-2 rounded-full border border-beige hover:bg-cream transition-colors self-start sm:self-center">Not this time</button>
+          </div>
+        </div>
 
         <!-- FORM -->
         <form id="order-form"
@@ -207,10 +224,12 @@
               class="w-full px-4 py-3 rounded-xl bg-beige/60 border border-beige focus:outline-none focus:ring-2 focus:ring-swedish focus:bg-cream transition resize-y"></textarea>
           </label>
 
-          <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-brown text-cream font-medium hover:bg-swedish transition-colors shadow-soft">
-            Send Order Request
+          <button type="submit" id="submit-btn"
+                  class="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-brown text-cream font-medium hover:bg-swedish transition-colors shadow-soft">
+            Pay &amp; Reserve with Stripe
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
           </button>
+          <p class="text-center text-xs text-brown-soft">Secure checkout powered by Stripe. You’ll be redirected to complete payment.</p>
 
           <p id="form-feedback" class="hidden text-center text-sm bg-swedish/10 text-swedish rounded-xl px-4 py-3" role="status"></p>
         </form>
@@ -226,7 +245,7 @@
               <ul class="text-sm text-brown-soft leading-relaxed space-y-2.5">
                 <li class="flex gap-3"><span class="text-crust mt-0.5">·</span>Wrapped in cellophane, tied in raffia</li>
                 <li class="flex gap-3"><span class="text-crust mt-0.5">·</span>A handwritten tag with your name and bake date</li>
-                <li class="flex gap-3"><span class="text-crust mt-0.5">·</span>A blessing card — a line of Scripture, a grace for the table (<a href="blessing.html" class="text-swedish hover:underline">why</a>)</li>
+                <li class="flex gap-3"><span class="text-crust mt-0.5">·</span>A small blessing card — a line from an old story about bread and welcome (<a href="blessing.html" class="text-swedish hover:underline">why</a>)</li>
                 <li class="flex gap-3"><span class="text-crust mt-0.5">·</span>Still warm enough to break by hand</li>
               </ul>
             </div>
@@ -234,9 +253,9 @@
 
           <div class="bg-beige rounded-2xl p-7">
             <h3 class="font-display text-2xl mb-3">How it works</h3>
-            <p class="text-sm text-brown-soft leading-relaxed mb-3"><strong class="text-brown">Pre-order, 48 hours ahead.</strong> Every loaf is baked the morning of your pickup. No shelf inventory, no leftovers — yours is yours.</p>
-            <p class="text-sm text-brown-soft leading-relaxed mb-3"><strong class="text-brown">Pickup, 3–6 PM.</strong> From our home kitchen on your selected date. We'll confirm the exact window when we respond.</p>
-            <p class="text-sm text-brown-soft leading-relaxed">Cash or Venmo at pickup.</p>
+            <p class="text-sm text-brown-soft leading-relaxed mb-3"><strong class="text-brown">Pre-order &amp; pay online.</strong> Secure checkout with Stripe. Your order is confirmed immediately.</p>
+            <p class="text-sm text-brown-soft leading-relaxed mb-3"><strong class="text-brown">Baked fresh.</strong> Every loaf is made the morning of your pickup in our home kitchen in Aviara / La Costa.</p>
+            <p class="text-sm text-brown-soft leading-relaxed"><strong class="text-brown">Pickup 3–6 PM.</strong> We’ll email you the exact window the day before.</p>
           </div>
 
           <div class="bg-brown text-cream rounded-2xl p-7">
@@ -291,5 +310,145 @@
   </button>
 
   <script src="js/main.js" defer></script>
+  <script>
+    // Table Profile handoff support (works with your-table.html)
+    (function() {
+      const banner = document.getElementById('profile-handoff');
+      if (!banner) return;
+
+      const params = new URLSearchParams(window.location.search);
+      const fromProfile = params.get('from') === 'profile';
+      let recText = params.get('rec');
+
+      let stored = null;
+      try {
+        const raw = sessionStorage.getItem('tableProfileRecommendation');
+        if (raw) stored = JSON.parse(raw);
+      } catch(e) {}
+
+      if (fromProfile || stored) {
+        banner.classList.remove('hidden');
+        const recEl = document.getElementById('handoff-recommendation');
+        if (!recEl) return;
+
+        if (stored && stored.title) {
+          recEl.textContent = stored.title;
+          const notes = document.querySelector('textarea[name="notes"]');
+          if (notes && !notes.value && stored.why) {
+            const clean = stored.why.replace(/<[^>]+>/g, ' ').trim().slice(0, 240);
+            notes.value = 'From my Table Profile: ' + clean;
+          }
+        } else if (recText) {
+          recEl.textContent = recText;
+        } else {
+          recEl.textContent = 'Thank you — we’ll use what we learned about your table.';
+        }
+      }
+    })();
+
+    function clearProfileHandoff() {
+      const banner = document.getElementById('profile-handoff');
+      if (banner) banner.style.display = 'none';
+      try { sessionStorage.removeItem('tableProfileRecommendation'); } catch(e) {}
+      const url = new URL(window.location);
+      url.searchParams.delete('from');
+      url.searchParams.delete('rec');
+      window.history.replaceState({}, '', url);
+    }
+
+    /* ========== STRIPE + FORMSPREE ORDER FLOW ========== */
+    (function initStripeOrder() {
+      const form = document.getElementById('order-form');
+      const submitBtn = document.getElementById('submit-btn');
+      if (!form || !submitBtn) return;
+
+      // Handle ?canceled=true from Stripe
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('canceled') === 'true') {
+        const feedback = document.getElementById('form-feedback');
+        if (feedback) {
+          feedback.textContent = 'Payment canceled. Your order was not placed. Feel free to try again.';
+          feedback.classList.remove('hidden', 'bg-swedish/10', 'text-swedish');
+          feedback.classList.add('bg-crust/10', 'text-crust');
+        }
+        // Clean the URL
+        const url = new URL(window.location);
+        url.searchParams.delete('canceled');
+        window.history.replaceState({}, '', url);
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Basic validation
+        const totalQty = Array.from(form.querySelectorAll('.qty'))
+          .reduce((sum, input) => sum + (parseInt(input.value, 10) || 0), 0);
+
+        if (totalQty < 1) {
+          const feedback = document.getElementById('form-feedback');
+          if (feedback) {
+            feedback.textContent = 'Please choose at least one loaf.';
+            feedback.classList.remove('hidden', 'bg-swedish/10', 'text-swedish');
+            feedback.classList.add('bg-crust/10', 'text-crust');
+          }
+          return;
+        }
+
+        // Loading state
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Processing…';
+
+        try {
+          const formData = new FormData(form);
+
+          // 1. Fire Formspree submission in background (keeps your email record)
+          fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          }).catch(() => {}); // fire and forget
+
+          // 2. Prepare clean data for our Stripe function
+          const payload = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone') || '',
+            pickup_date: formData.get('pickup_date'),
+            country_full: formData.get('country_full') || 0,
+            country_half: formData.get('country_half') || 0,
+            notes: formData.get('notes') || '',
+          };
+
+          // 3. Create Stripe Checkout Session
+          const res = await fetch('/api/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok || !data.url) {
+            throw new Error(data.error || 'Failed to start checkout');
+          }
+
+          // 4. Redirect to Stripe
+          window.location.href = data.url;
+
+        } catch (err) {
+          console.error(err);
+          const feedback = document.getElementById('form-feedback');
+          if (feedback) {
+            feedback.textContent = 'Something went wrong starting checkout. Please try again or email us.';
+            feedback.classList.remove('hidden', 'bg-swedish/10', 'text-swedish');
+            feedback.classList.add('bg-crust/10', 'text-crust');
+          }
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

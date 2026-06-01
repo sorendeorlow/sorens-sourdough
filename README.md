@@ -39,26 +39,39 @@ python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
-## Deploy to GitHub Pages
+## Deploy to Vercel (Recommended)
 
-1. Push this folder to a GitHub repo (e.g. `soren-sourdough`).
-2. In **Settings → Pages**, set the source to the `main` branch, root folder.
-3. Your site goes live at `https://<username>.github.io/<repo>/`.
+This site now uses Vercel for hosting + serverless functions (required for Stripe Checkout).
 
-For a custom domain, add a `CNAME` file with your domain name and configure DNS.
+1. Push your changes to GitHub.
+2. Go to [vercel.com](https://vercel.com) → **Add New Project** → Import the `sorens-sourdough` repo.
+3. Vercel will auto-detect it as a static site.
+4. Add the following **Environment Variables** in the Vercel dashboard:
+   - `STRIPE_SECRET_KEY` → your `sk_live_...` key (or `sk_test_...` for testing)
+   - (Optional but recommended) `STRIPE_WEBHOOK_SECRET` for later fulfillment webhooks
+5. Deploy. Your site will be live at a `vercel.app` URL (you can add a custom domain later).
 
-## Setting up the order form
+The `api/create-checkout-session.js` function will be deployed automatically.
 
-The order form on `order.html` is wired for [Formspree](https://formspree.io).
+**Note:** GitHub Pages is no longer used for the main site because it cannot run serverless functions.
 
-1. Create a free Formspree account and a new form.
-2. Replace `YOUR_FORM_ID` in `order.html`:
-   ```html
-   <form action="https://formspree.io/f/YOUR_FORM_ID" ...>
-   ```
-3. Test by submitting a fake order — it should arrive in your email.
+## Setting up the order form + Stripe
 
-Until that's configured, the form runs in **demo mode** (it validates and shows a confirmation but doesn't actually send anything).
+The order form now uses a two-part flow:
+- Order details are still sent via **Formspree** (email notification)
+- Payment is handled via **Stripe Checkout** (secure hosted page)
+
+### Formspree (order details)
+Keep your existing Formspree form ID in `order.html` (`mqejjoev` is currently set).
+
+### Stripe
+1. In your Stripe Dashboard, create **Products & Prices** for:
+   - Country Levain Full ($16)
+   - Country Levain Half ($9)
+2. Add your **Secret Key** as the `STRIPE_SECRET_KEY` environment variable in Vercel (see deployment section above).
+3. (Later) You can replace the `price_data` in `api/create-checkout-session.js` with your actual Price IDs for better reporting.
+
+The current implementation uses `price_data` (dynamic) so you can go live quickly without creating Price IDs first.
 
 ## Setting up the newsletter popup
 

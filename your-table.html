@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Your Table — Communion Breads</title>
+  <meta name="description" content="A short conversation to find the right loaf for the people at your table. Baked for Aviara and La Costa neighbors." />
+  <meta name="theme-color" content="#4A3728" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23B98655' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='50' y1='92' x2='50' y2='15'/%3E%3Cpath d='M50 20 Q40 26 42 35'/%3E%3Cpath d='M50 32 Q38 40 41 52'/%3E%3Cpath d='M50 46 Q36 55 40 68'/%3E%3Cpath d='M50 20 Q60 26 58 35'/%3E%3Cpath d='M50 32 Q62 40 59 52'/%3E%3Cpath d='M50 46 Q64 55 60 68'/%3E%3Cpath d='M50 15 Q47 8 50 3 Q53 8 50 15'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            beige:   '#F5F0E8',
+            cream:   '#FAF7F2',
+            brown:   '#4A3728',
+            'brown-soft': '#6B5340',
+            swedish: '#2A5C8A',
+            'swedish-soft': '#4A7CAA',
+            crust:   '#B98655',
+          },
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            body:    ['Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            soft: '0 10px 40px -15px rgba(74, 55, 40, 0.25)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .step { display: none; }
+    .step.active { display: block; }
+    .chip {
+      display: inline-flex; align-items: center; padding: 10px 18px;
+      border: 1px solid #EDE5D9; background: #F5F0E8; color: #4A3728;
+      border-radius: 9999px; font-size: 14px; cursor: pointer;
+      transition: all .15s ease;
+    }
+    .chip:hover { 
+      border-color: #B98655; 
+      background: #F5EDE0; /* warm tan highlight for unselected */
+    }
+
+    .chip.selected {
+      background: #4A3728; 
+      color: #FAF7F2; 
+      border-color: #4A3728;
+    }
+
+    .chip.selected:hover {
+      background: #3A2A20; /* slightly darker brown on hover when selected */
+      border-color: #3A2A20;
+    }
+
+    .chip:focus,
+    .chip:focus-within {
+      outline: none;
+      box-shadow: none;
+    }
+    .profile-card {
+      background: #FAF7F2;
+      border: 1px solid #EDE5D9;
+      border-radius: 20px;
+    }
+    .gentle-label {
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #B98655; font-weight: 500;
+    }
+  </style>
+</head>
+<body class="font-body bg-cream text-brown antialiased">
+
+  <!-- NAV -->
+  <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-cream/90 backdrop-blur-md border-b border-beige">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between" aria-label="Primary">
+      <a href="index.html" class="group block leading-none">
+        <span class="font-display text-[22px] md:text-[26px] text-brown group-hover:text-swedish transition-colors tracking-tight block">Communion Breads</span>
+        <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-brown-soft/70 mt-1.5 block">by Soren Deorlow</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-10 text-[13px] tracking-wide">
+        <li><a href="index.html"   class="nav-link">Home</a></li>
+        <li><a href="about.html"   class="nav-link">About</a></li>
+        <li><a href="loaves.html"  class="nav-link">Breads</a></li>
+        <li><a href="your-table.html" class="nav-link nav-active">For Your Table</a></li>
+        <li><a href="process.html" class="nav-link">The Process</a></li>
+        <li><a href="order.html"   class="ml-3 px-5 py-2.5 rounded-full bg-brown text-cream hover:bg-swedish transition-colors text-[13px] tracking-wide">Order</a></li>
+      </ul>
+
+      <button id="menu-toggle" class="md:hidden p-2 -mr-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </nav>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-beige bg-cream">
+      <ul class="px-6 py-4 space-y-1 text-base">
+        <li><a href="index.html"   class="block py-3 border-b border-beige">Home</a></li>
+        <li><a href="about.html"   class="block py-3 border-b border-beige">About</a></li>
+        <li><a href="loaves.html"  class="block py-3 border-b border-beige">Breads</a></li>
+        <li><a href="your-table.html" class="block py-3 border-b border-beige font-medium">For Your Table</a></li>
+        <li><a href="process.html" class="block py-3 border-b border-beige">The Process</a></li>
+        <li><a href="order.html"   class="block py-3 text-swedish font-semibold">Order →</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="pt-28 md:pt-32 pb-12 md:pb-16 bg-beige">
+      <div class="max-w-3xl mx-auto px-6 lg:px-10 text-center">
+        <span class="gentle-label tracking-[0.22em]">Aviara &amp; La Costa</span>
+        <h1 class="font-display text-5xl md:text-6xl lg:text-[68px] mt-4 leading-[1.05] tracking-[-0.01em]">Bread for your table.</h1>
+        <p class="mt-6 text-xl text-brown-soft max-w-2xl mx-auto leading-relaxed">
+          A short, thoughtful conversation to find the right loaf for the people who gather at your table this season.
+        </p>
+      </div>
+    </section>
+
+    <!-- THE EXPERIENCE -->
+    <section class="max-w-3xl mx-auto px-6 lg:px-10 pt-8 pb-20">
+      <div class="profile-card p-8 md:p-12 shadow-soft">
+
+        <!-- Progress -->
+        <div class="flex items-center justify-between mb-8">
+          <div class="gentle-label">The Table Profile</div>
+          <div class="text-xs text-brown-soft" id="progress-text">Step 1 of 5</div>
+        </div>
+
+        <!-- STEPS -->
+        <form id="table-profile" onsubmit="return false;">
+
+          <!-- STEP 1: The People -->
+          <div class="step active" data-step="1">
+            <div class="gentle-label mb-2">The People</div>
+            <h2 class="font-display text-3xl md:text-4xl leading-tight mb-6">Who gathers around your table most often these days?</h2>
+            
+            <div class="space-y-3" id="q1-options">
+              <label class="chip w-full justify-between px-5 py-3.5" data-value="family">
+                <span>My family — partner, children, or household</span>
+                <input type="checkbox" class="hidden" name="people" value="family">
+              </label>
+              <label class="chip w-full justify-between px-5 py-3.5" data-value="couple">
+                <span>Mostly my partner and me</span>
+                <input type="checkbox" class="hidden" name="people" value="couple">
+              </label>
+              <label class="chip w-full justify-between px-5 py-3.5" data-value="solo">
+                <span>Mostly just me</span>
+                <input type="checkbox" class="hidden" name="people" value="solo">
+              </label>
+              <label class="chip w-full justify-between px-5 py-3.5" data-value="guests">
+                <span>Frequent guests, neighbors, and friends</span>
+                <input type="checkbox" class="hidden" name="people" value="guests">
+              </label>
+              <label class="chip w-full justify-between px-5 py-3.5" data-value="hosting">
+                <span>We host often — dinner parties, Sunday meals, holidays</span>
+                <input type="checkbox" class="hidden" name="people" value="hosting">
+              </label>
+            </div>
+
+            <div class="mt-8 flex justify-end">
+              <button type="button" onclick="nextStep(1)" class="px-8 py-3 rounded-full bg-brown text-cream font-medium hover:bg-crust transition-colors">Continue</button>
+            </div>
+          </div>
+
+          <!-- STEP 2: The Need -->
+          <div class="step" data-step="2">
+            <div class="gentle-label mb-2">What you’re reaching for</div>
+            <h2 class="font-display text-3xl md:text-4xl leading-tight mb-6">When you picture really good bread coming into your week, what are you hoping it will bring?</h2>
+
+            <div class="grid sm:grid-cols-2 gap-3" id="q2-options" style="grid-auto-rows: minmax(0, 1fr);">
+              <label class="chip px-5 py-3.5 flex items-center gap-3" data-value="family">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1v-5m-6 0a1 1 0 001-1v-4a1 1 0 00-1-1H9a1 1 0 00-1 1v4a1 1 0 001 1" />
+                </svg>
+                <span><input type="radio" name="need" value="family" class="hidden">I want something wholesome to celebrate with my family</span>
+              </label>
+              <label class="chip px-5 py-3.5 flex items-center gap-3" data-value="guests">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                <span><input type="radio" name="need" value="guests" class="hidden">I want bread that makes guests feel truly welcomed</span>
+              </label>
+              <label class="chip px-5 py-3.5 flex items-center gap-3" data-value="slow">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span><input type="radio" name="need" value="slow" class="hidden">I want a reason to slow down and connect at the table</span>
+              </label>
+              <label class="chip px-5 py-3.5 flex items-center gap-3" data-value="nourish">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v18M3 5h4M5 10h4M5 15h4" />
+                </svg>
+                <span><input type="radio" name="need" value="nourish" class="hidden">I want something hearty and grounding for everyday meals</span>
+              </label>
+              <label class="chip px-5 py-3.5 flex items-center gap-3" data-value="celebrate">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+                <span><input type="radio" name="need" value="celebrate" class="hidden">I want a small celebration with real craft at the table</span>
+              </label>
+              <label class="chip px-5 py-3.5 flex items-center gap-3" data-value="community">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <span><input type="radio" name="need" value="community" class="hidden">I want to support and connect with my neighborhood to grow community</span>
+              </label>
+            </div>
+
+            <div class="mt-8 flex justify-between">
+              <button type="button" onclick="prevStep(2)" class="px-6 py-3 text-sm text-brown-soft hover:text-brown">Back</button>
+              <button type="button" onclick="nextStep(2)" class="px-8 py-3 rounded-full bg-brown text-cream font-medium hover:bg-crust transition-colors">Continue</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Local Reality -->
+          <div class="step" data-step="3">
+            <div class="gentle-label mb-2">Aviara &amp; La Costa</div>
+            <h2 class="font-display text-3xl md:text-4xl leading-tight mb-6">We bake in a home kitchen here in the neighborhood. How does that land with you?</h2>
+
+            <div class="space-y-3" id="q3-options">
+              <label class="chip w-full px-5 py-3.5" data-value="love"><input type="radio" name="local" value="love" class="hidden">I love supporting makers who live in the same area</label>
+              <label class="chip w-full px-5 py-3.5" data-value="convenient"><input type="radio" name="local" value="convenient" class="hidden">Convenient — it fits how I already move through the week</label>
+              <label class="chip w-full px-5 py-3.5" data-value="open"><input type="radio" name="local" value="open" class="hidden">New to me, but I’m open to it</label>
+              <label class="chip w-full px-5 py-3.5" data-value="prefer"><input type="radio" name="local" value="prefer" class="hidden">I usually prefer one-stop shopping or delivery</label>
+            </div>
+
+            <div class="mt-8 flex justify-between">
+              <button type="button" onclick="prevStep(3)" class="px-6 py-3 text-sm text-brown-soft hover:text-brown">Back</button>
+              <button type="button" onclick="nextStep(3)" class="px-8 py-3 rounded-full bg-brown text-cream font-medium hover:bg-crust transition-colors">Continue</button>
+            </div>
+          </div>
+
+          <!-- STEP 4: Experience -->
+          <div class="step" data-step="4">
+            <div class="gentle-label mb-2">Experience</div>
+            <h2 class="font-display text-3xl md:text-4xl leading-tight mb-6">Have you tried our Country Levain before?</h2>
+
+            <div class="space-y-3" id="q4-options">
+              <label class="chip w-full px-5 py-3.5" data-value="loved"><input type="radio" name="experience" value="loved" class="hidden">Yes — I loved it</label>
+              <label class="chip w-full px-5 py-3.5" data-value="good"><input type="radio" name="experience" value="good" class="hidden">Yes — it was good</label>
+              <label class="chip w-full px-5 py-3.5" data-value="first"><input type="radio" name="experience" value="first" class="hidden">No, this would be my first time</label>
+              <label class="chip w-full px-5 py-3.5" data-value="meaning"><input type="radio" name="experience" value="meaning" class="hidden">I’ve been meaning to try it</label>
+            </div>
+
+            <div class="mt-8 flex justify-between">
+              <button type="button" onclick="prevStep(4)" class="px-6 py-3 text-sm text-brown-soft hover:text-brown">Back</button>
+              <button type="button" onclick="nextStep(4)" class="px-8 py-3 rounded-full bg-brown text-cream font-medium hover:bg-crust transition-colors">Continue</button>
+            </div>
+          </div>
+
+          <!-- STEP 5: Quantity lean -->
+          <div class="step" data-step="5">
+            <div class="gentle-label mb-2">How much feels right</div>
+            <h2 class="font-display text-3xl md:text-4xl leading-tight mb-6">In a typical week, how many people are you feeding bread to?</h2>
+
+            <div class="space-y-3" id="q5-options">
+              <label class="chip w-full px-5 py-3.5" data-value="1-2"><input type="radio" name="quantity" value="1-2" class="hidden">Just 1–2 people (a half loaf often lasts us)</label>
+              <label class="chip w-full px-5 py-3.5" data-value="3-5"><input type="radio" name="quantity" value="3-5" class="hidden">3–5 people (a full loaf disappears quickly)</label>
+              <label class="chip w-full px-5 py-3.5" data-value="6plus"><input type="radio" name="quantity" value="6plus" class="hidden">6 or more — we’re often feeding a crowd</label>
+              <label class="chip w-full px-5 py-3.5" data-value="variable"><input type="radio" name="quantity" value="variable" class="hidden">It changes week to week</label>
+            </div>
+
+            <div class="mt-8 flex justify-between">
+              <button type="button" onclick="prevStep(5)" class="px-6 py-3 text-sm text-brown-soft hover:text-brown">Back</button>
+              <button type="button" onclick="revealProfile()" class="px-8 py-3 rounded-full bg-swedish text-cream font-medium hover:bg-brown transition-colors">See what we’d suggest for your table</button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- RESULTS -->
+        <div id="profile-results" class="hidden">
+          <div class="border-b border-beige pb-6 mb-8">
+            <h2 id="results-headline" class="font-display text-4xl md:text-5xl leading-tight"></h2>
+          </div>
+
+          <div id="results-reflection" class="text-[17px] text-brown-soft leading-relaxed space-y-5 mb-10">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="bg-beige/60 rounded-2xl p-7 md:p-8 mb-8">
+            <div class="gentle-label mb-3">Our recommendation for you</div>
+            <div id="results-recommendation" class="font-display text-2xl md:text-3xl leading-tight text-brown"></div>
+            <div id="results-why" class="mt-4 text-[15px] text-brown-soft leading-relaxed"></div>
+
+            <div class="mt-6 pt-6 border-t border-beige/70 text-sm">
+              <div class="flex flex-wrap gap-x-6 gap-y-1 text-brown-soft">
+                <div><span class="font-medium text-brown">Pickup:</span> 3–6pm from our home kitchen</div>
+                <div><span class="font-medium text-brown">Baked:</span> Fresh that morning</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+            <button onclick="reserveRecommended()" 
+                    class="flex-1 inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-brown text-cream font-medium hover:bg-swedish transition-colors text-base">
+              Reserve this for my table
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </button>
+            <button onclick="restartProfile()" 
+                    class="px-7 py-4 rounded-full border border-beige hover:bg-beige text-sm font-medium transition-colors">
+              Adjust my answers
+            </button>
+          </div>
+
+          <p class="text-center text-xs text-brown-soft mt-6">You can always change quantities or dates on the order form. We’ll confirm everything by email.</p>
+        </div>
+
+      </div>
+
+      <!-- Gentle footer note on the experience -->
+      <div class="text-center mt-10 text-xs text-brown-soft/60 max-w-xs mx-auto">
+        No pressure. No email gate. Just a better way to decide what belongs at your table.
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-brown text-cream/80">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-4 gap-10">
+      <div class="md:col-span-2">
+        <div class="leading-none mb-4">
+          <span class="font-display text-2xl text-cream block tracking-tight">Communion Breads</span>
+          <span class="text-[10px] font-medium tracking-[0.22em] uppercase text-cream/50 mt-1.5 block">by Soren Deorlow</span>
+        </div>
+        <p class="text-sm leading-relaxed max-w-sm">Bread for your table, baked for you. Small-batch levain sourdough out of a home kitchen, with Swedish craft and patience in every loaf.</p>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Explore</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html" class="hover:text-cream transition-colors">About</a></li>
+          <li><a href="loaves.html" class="hover:text-cream transition-colors">Breads</a></li>
+          <li><a href="your-table.html" class="hover:text-cream transition-colors">For Your Table</a></li>
+          <li><a href="hosts.html" class="hover:text-cream transition-colors">For Hosts</a></li>
+          <li><a href="blessing.html" class="hover:text-cream transition-colors">The Blessing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-cream font-medium mb-4 text-sm tracking-wider uppercase">Contact</h3>
+        <ul class="space-y-2 text-sm">
+          <li><a href="mailto:hello@sorenssourdough.com" class="hover:text-cream transition-colors">hello@sorenssourdough.com</a></li>
+          <li class="text-cream/50">Aviara &amp; La Costa, Carlsbad</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-cream/10">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row justify-between gap-3 text-xs text-cream/60">
+        <p>© <span id="year">2026</span> Soren's Sourdough · Baked with pride in a home kitchen.</p>
+        <p>Tack så mycket · Thank you</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script>
+    // ================== TABLE PROFILE LOGIC ==================
+    let currentStep = 1;
+    const totalSteps = 5;
+    let answers = {};
+
+    function showStep(n) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      const stepEl = document.querySelector(`.step[data-step="${n}"]`);
+      if (stepEl) stepEl.classList.add('active');
+      document.getElementById('progress-text').textContent = `Step ${n} of ${totalSteps}`;
+      currentStep = n;
+    }
+
+    function nextStep(from) {
+      // Collect answers for current step before moving
+      collectStepAnswers(from);
+      if (from < totalSteps) {
+        showStep(from + 1);
+      }
+    }
+
+    function prevStep(from) {
+      collectStepAnswers(from);
+      if (from > 1) showStep(from - 1);
+    }
+
+    function collectStepAnswers(step) {
+      if (step === 1) {
+        answers.people = Array.from(document.querySelectorAll('input[name="people"]:checked')).map(i => i.value);
+      }
+      if (step === 2) {
+        const checked = document.querySelector('input[name="need"]:checked');
+        if (checked) answers.need = checked.value;
+      }
+      if (step === 3) {
+        const checked = document.querySelector('input[name="local"]:checked');
+        if (checked) answers.local = checked.value;
+      }
+      if (step === 4) {
+        const checked = document.querySelector('input[name="experience"]:checked');
+        if (checked) answers.experience = checked.value;
+      }
+      if (step === 5) {
+        const checked = document.querySelector('input[name="quantity"]:checked');
+        if (checked) answers.quantity = checked.value;
+      }
+    }
+
+    // Chip selection visuals
+    function setupChips() {
+      // Multi-select for step 1
+      document.querySelectorAll('#q1-options .chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const input = chip.querySelector('input');
+          input.checked = !input.checked;
+          chip.classList.toggle('selected', input.checked);
+        });
+      });
+
+      // Single select radio chips
+      document.querySelectorAll('#q2-options .chip, #q3-options .chip, #q4-options .chip, #q5-options .chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          // Deselect siblings
+          chip.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          const input = chip.querySelector('input');
+          if (input) input.checked = true;
+        });
+      });
+    }
+
+    // Generate beautiful, personalized results
+    function revealProfile() {
+      collectStepAnswers(6);
+
+      const results = document.getElementById('profile-results');
+      const form = document.getElementById('table-profile');
+      form.style.display = 'none';
+      results.classList.remove('hidden');
+
+      // Generate headline + reflection + recommendation
+      const headline = generateHeadline(answers);
+      const reflection = generateReflection(answers);
+      const rec = generateRecommendation(answers);
+
+      document.getElementById('results-headline').innerHTML = headline;
+      document.getElementById('results-reflection').innerHTML = reflection;
+      document.getElementById('results-recommendation').innerHTML = rec.title;
+      document.getElementById('results-why').innerHTML = rec.why;
+
+      // Store recommendation for handoff to order page
+      window.currentRecommendation = rec;
+      window.profileAnswers = answers;
+
+      // Scroll to results
+      results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function generateHeadline(answers) {
+      const people = answers.people || [];
+      if (people.includes('hosting')) return 'A generous, welcoming table.';
+      if (people.includes('guests')) return 'A table that makes room.';
+      if (people.includes('family') && answers.quantity === '3-5') return 'A family table with good bread at its center.';
+      if (people.includes('solo') || people.includes('couple')) return 'A quieter table that still deserves beauty.';
+      return 'A table worth baking for.';
+    }
+
+    function generateReflection(answers) {
+      const parts = [];
+      const people = answers.people || [];
+      const need = answers.need;
+      const local = answers.local;
+      const quantity = answers.quantity;
+
+      // Opening insight (Oz Pearlman + Voss labeling energy)
+      if (people.includes('hosting')) {
+        parts.push('You’re someone who opens your home and wants the food on the table to match the welcome you’re offering.');
+      } else if (people.includes('guests')) {
+        parts.push('Your table is a place where people feel invited in — not just fed, but welcomed.');
+      } else if (people.includes('family')) {
+        parts.push('You care about the ordinary days as much as the special ones. The bread that shows up every week matters.');
+      } else {
+        parts.push('You want the bread at your table to feel intentional, not just convenient.');
+      }
+
+      // Local + practical
+      if (local === 'love' || local === 'convenient') {
+        parts.push('Picking up something warm from a neighbor’s kitchen feels right to you — it fits the way you want to live in this area.');
+      } else if (local === 'open') {
+        parts.push('You’re open to a more personal way of getting good bread into the neighborhood.');
+      }
+
+      // (open question removed)
+
+      // Quantity hint
+      if (quantity === '6plus' || people.includes('hosting')) {
+        parts.push('You’re often feeding more than just your own household. You need bread that can stretch into generosity.');
+      } else if (quantity === '1-2') {
+        parts.push('A smaller household doesn’t mean the bread should be an afterthought. Half loaves make a lot of sense.');
+      }
+
+      // Community angle
+      if (need === 'community') {
+        parts.push('You’re thinking beyond your own table — you want bread that helps strengthen the neighborhood around you.');
+      }
+
+      return parts.map(p => `<p>${p}</p>`).join('');
+    }
+
+    function generateRecommendation(answers) {
+      const people = answers.people || [];
+      const need = answers.need;
+      const quantity = answers.quantity;
+      const experience = answers.experience;
+
+      let title = 'Two half loaves of Country Levain';
+      let why = 'Our signature daily loaf is versatile enough for both everyday meals and when someone drops by. The open crumb and caramelized crust hold up beautifully to butter, cheese, or a good soup.';
+
+      // Logic branches
+      if (quantity === '6plus' || people.includes('hosting')) {
+        title = 'Three full Country Levains';
+        why = 'When your table regularly expands, one loaf is rarely enough. Three full loaves give you the capacity to host without stress and still have a little left for the next day. We’ll bake them fresh the morning you pick up.';
+      } else if (quantity === '1-2' || people.includes('solo') || people.includes('couple')) {
+        title = 'One full or two half loaves of Country Levain';
+        why = 'A half loaf stays fresh and special for a few days. Many of our neighbors in Aviara and La Costa prefer this rhythm — enough for real bread at dinner without waste.';
+      } else if (need === 'guests' || need === 'celebrate' || need === 'community' || people.includes('hosting')) {
+        title = 'Two full Country Levains';
+        why = 'For weeks when the table is doing more work — guests, Sunday dinner, a birthday — two full loaves let you tear one and still have a second ready.';
+      }
+
+      if (experience === 'first') {
+        why += ' If this is your first time with us, the Country Levain is the best place to begin. It shows you exactly how we bake.';
+      }
+
+      // Ezekiel 4:9 reference for nourishing preference
+      if (need === 'nourish') {
+        why += ' When our Seeded Multigrain returns — inspired by the ancient recipe in Ezekiel 4:9 — it will be a beautiful option for those seeking deeper nourishment.';
+      }
+
+      // Add a very light biblical/hospitality echo (inviting, not preachy)
+      why += ' It will leave our kitchen with a small handwritten tag and a simple blessing card — a line from an old story about bread and welcome.';
+
+      return { title, why };
+    }
+
+    function reserveRecommended() {
+      const rec = window.currentRecommendation;
+      if (!rec) return;
+
+      // Encode recommendation into URL for the order page
+      const params = new URLSearchParams();
+      params.set('from', 'profile');
+      params.set('rec', rec.title);
+      
+      // Store full context in sessionStorage for the order page to read
+      try {
+        sessionStorage.setItem('tableProfileRecommendation', JSON.stringify({
+          title: rec.title,
+          why: rec.why,
+          answers: window.profileAnswers || {}
+        }));
+      } catch(e) {}
+
+      // Go to order page with context
+      window.location.href = `order.html?${params.toString()}`;
+    }
+
+    function restartProfile() {
+      const results = document.getElementById('profile-results');
+      const form = document.getElementById('table-profile');
+      
+      results.classList.add('hidden');
+      form.style.display = 'block';
+
+      // Reset form state
+      form.reset();
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+      document.getElementById('q5-answer').value = '';
+
+      // Go back to first step
+      showStep(1);
+    }
+
+    function setupMobileMenu() {
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          const open = mobileMenu.classList.toggle('hidden') === false;
+          menuToggle.setAttribute('aria-expanded', String(open));
+          menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        });
+      }
+    }
+
+    function setupHeaderShadow() {
+      const header = document.getElementById('site-header');
+      if (header) {
+        const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      }
+    }
+
+    function setupYear() {
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    }
+
+    // Keyboard support for nicer feel
+    function setupKeyboard() {
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const active = document.querySelector('.step.active');
+          if (active && !active.querySelector('textarea:focus')) {
+            const nextBtn = active.querySelector('button[onclick*="nextStep"], button[onclick*="revealProfile"]');
+            if (nextBtn) nextBtn.click();
+          }
+        }
+      });
+    }
+
+    function init() {
+      setupChips();
+      setupMobileMenu();
+      setupHeaderShadow();
+      setupYear();
+      setupKeyboard();
+      showStep(1);
+
+      // Make chips nicer on radio groups too
+      document.querySelectorAll('#q2-options .chip, #q3-options .chip, #q6-options .chip').forEach(chip => {
+        const input = chip.querySelector('input');
+        if (input) {
+          input.addEventListener('change', () => {
+            chip.parentElement.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+            chip.classList.add('selected');
+          });
+        }
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
