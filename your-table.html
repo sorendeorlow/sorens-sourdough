@@ -302,6 +302,15 @@
             </div>
           </div>
 
+          <!-- Hosts upsell (shown conditionally via JS) -->
+          <div id="hosts-upsell" class="hidden bg-brown text-cream rounded-2xl p-7 md:p-8 mb-8">
+            <div class="gentle-label mb-2 text-crust">Hosting often?</div>
+            <p class="font-display text-2xl leading-tight mb-3">We offer curated host bundles with larger quantities and easier ordering.</p>
+            <a href="hosts.html" class="inline-flex items-center gap-2 text-sm font-medium underline decoration-crust underline-offset-4 hover:text-crust">
+              Explore Host Bundles →
+            </a>
+          </div>
+
           <div class="flex flex-col sm:flex-row gap-3">
             <button onclick="reserveRecommended()" 
                     class="flex-1 inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-brown text-cream font-medium hover:bg-swedish transition-colors text-base">
@@ -456,6 +465,16 @@
 
       // Store recommendation for handoff to order page
       window.currentRecommendation = rec;
+
+      // Show hosts upsell if they host frequently
+      const hostsUpsell = document.getElementById('hosts-upsell');
+      if (hostsUpsell) {
+        const hostsOften = answers.people && answers.people.includes('hosting');
+        const highQuantity = answers.quantity === '6plus' || answers.quantity === '3-5';
+        if (hostsOften || highQuantity) {
+          hostsUpsell.classList.remove('hidden');
+        }
+      }
       window.profileAnswers = answers;
 
       // Scroll to results
