@@ -116,7 +116,7 @@
           <!-- ITEM SELECTION -->
           <fieldset class="border-t border-beige pt-6">
             <legend class="font-display text-2xl mb-2">Choose your loaves</legend>
-            <p class="text-sm text-brown-soft mb-5">Country Levain is what's baking right now. The rest of the line is on the way.</p>
+            <p class="text-sm text-brown-soft mb-5">Country Levain, Heritage Wheat &amp; Wildflower Raw Honey, and Ezekiel Sustinance Bread are what's baking right now. The rest of the line is on the way.</p>
 
             <!-- BREADS -->
             <p class="text-[11px] font-medium tracking-[0.22em] uppercase text-swedish mb-3">Breads</p>
@@ -138,6 +138,38 @@
                 </label>
               </div>
 
+              <!-- Heritage Wheat & Wildflower Raw Honey — AVAILABLE -->
+              <div class="grid grid-cols-12 gap-3 items-center bg-beige/60 rounded-xl p-4 ring-1 ring-brown/5">
+                <div class="col-span-12 sm:col-span-6">
+                  <p class="font-display text-lg leading-tight">Heritage Wheat &amp; Wildflower Raw Honey</p>
+                  <p class="text-xs text-brown-soft">Full $18 · Half $10</p>
+                </div>
+                <label class="col-span-6 sm:col-span-3 text-xs">
+                  <span class="text-brown-soft block mb-1">Full</span>
+                  <input type="number" name="heritage_full" min="0" max="10" value="0" class="qty w-full px-3 py-2 rounded-lg bg-cream border border-beige text-center" />
+                </label>
+                <label class="col-span-6 sm:col-span-3 text-xs">
+                  <span class="text-brown-soft block mb-1">Half</span>
+                  <input type="number" name="heritage_half" min="0" max="10" value="0" class="qty w-full px-3 py-2 rounded-lg bg-cream border border-beige text-center" />
+                </label>
+              </div>
+
+              <!-- Ezekiel Sustinance Bread — AVAILABLE -->
+              <div class="grid grid-cols-12 gap-3 items-center bg-beige/60 rounded-xl p-4 ring-1 ring-brown/5">
+                <div class="col-span-12 sm:col-span-6">
+                  <p class="font-display text-lg leading-tight">Ezekiel Sustinance Bread</p>
+                  <p class="text-xs text-brown-soft">Full $18 · Half $10</p>
+                </div>
+                <label class="col-span-6 sm:col-span-3 text-xs">
+                  <span class="text-brown-soft block mb-1">Full</span>
+                  <input type="number" name="ezekiel_full" min="0" max="10" value="0" class="qty w-full px-3 py-2 rounded-lg bg-cream border border-beige text-center" />
+                </label>
+                <label class="col-span-6 sm:col-span-3 text-xs">
+                  <span class="text-brown-soft block mb-1">Half</span>
+                  <input type="number" name="ezekiel_half" min="0" max="10" value="0" class="qty w-full px-3 py-2 rounded-lg bg-cream border border-beige text-center" />
+                </label>
+              </div>
+
               <!-- Seeded Multigrain — COMING SOON -->
               <div class="grid grid-cols-12 gap-3 items-center bg-beige/30 rounded-xl p-4 opacity-70">
                 <div class="col-span-12 sm:col-span-6">
@@ -154,17 +186,6 @@
                 <div class="col-span-12 sm:col-span-6">
                   <p class="font-display text-lg leading-tight text-brown">Nordic Rye</p>
                   <p class="text-xs text-brown-soft/80">Full $17 · Half $9.50</p>
-                </div>
-                <div class="col-span-12 sm:col-span-6 sm:text-right">
-                  <span class="inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
-                </div>
-              </div>
-
-              <!-- Spelt & Honey — COMING SOON -->
-              <div class="grid grid-cols-12 gap-3 items-center bg-beige/30 rounded-xl p-4 opacity-70">
-                <div class="col-span-12 sm:col-span-6">
-                  <p class="font-display text-lg leading-tight text-brown">Spelt &amp; Honey</p>
-                  <p class="text-xs text-brown-soft/80">Full $18 · Half $10</p>
                 </div>
                 <div class="col-span-12 sm:col-span-6 sm:text-right">
                   <span class="inline-block bg-brown text-cream text-[10px] font-medium tracking-[0.2em] uppercase px-3 py-1.5 rounded-full">Coming Soon</span>
@@ -417,6 +438,10 @@
             pickup_date: formData.get('pickup_date'),
             country_full: formData.get('country_full') || 0,
             country_half: formData.get('country_half') || 0,
+            heritage_full: formData.get('heritage_full') || 0,
+            heritage_half: formData.get('heritage_half') || 0,
+            ezekiel_full: formData.get('ezekiel_full') || 0,
+            ezekiel_half: formData.get('ezekiel_half') || 0,
             notes: formData.get('notes') || '',
           };
 

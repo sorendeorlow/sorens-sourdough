@@ -96,7 +96,8 @@
       country_full:    16,   country_half:    9,
       multigrain_full: 18,   multigrain_half: 10,
       rye_full:        17,   rye_half:        9.5,
-      spelt_full:      18,   spelt_half:      10,
+      heritage_full:   18,   heritage_half:   10,
+      ezekiel_full:    18,   ezekiel_half:    10,
     };
 
     const totalEl       = document.getElementById('order-total');

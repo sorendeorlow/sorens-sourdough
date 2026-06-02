@@ -23,11 +23,15 @@ module.exports = async (req, res) => {
       pickup_date,
       country_full = 0,
       country_half = 0,
+      heritage_full = 0,
+      heritage_half = 0,
+      ezekiel_full = 0,
+      ezekiel_half = 0,
       notes = '',
     } = req.body;
 
     // Basic validation
-    if (!email || (!country_full && !country_half)) {
+    if (!email || (!country_full && !country_half && !heritage_full && !heritage_half && !ezekiel_full && !ezekiel_half)) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
@@ -70,6 +74,78 @@ module.exports = async (req, res) => {
       });
     }
 
+    // Heritage Wheat & Wildflower Raw Honey - Full ($18)
+    if (parseInt(heritage_full) > 0) {
+      lineItems.push({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Heritage Wheat & Wildflower Raw Honey (Full)',
+            description: '≈1kg loaf • Baked fresh the morning of pickup',
+            metadata: {
+              sku: 'heritage-wheat-full',
+            },
+          },
+          unit_amount: 1800, // $18.00 in cents
+        },
+        quantity: parseInt(heritage_full),
+      });
+    }
+
+    // Heritage Wheat & Wildflower Raw Honey - Half ($10)
+    if (parseInt(heritage_half) > 0) {
+      lineItems.push({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Heritage Wheat & Wildflower Raw Honey (Half)',
+            description: '≈500g loaf • Baked fresh the morning of pickup',
+            metadata: {
+              sku: 'heritage-wheat-half',
+            },
+          },
+          unit_amount: 1000, // $10.00 in cents
+        },
+        quantity: parseInt(heritage_half),
+      });
+    }
+
+    // Ezekiel Sustinance Bread - Full ($18)
+    if (parseInt(ezekiel_full) > 0) {
+      lineItems.push({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Ezekiel Sustinance Bread (Full)',
+            description: '≈1kg loaf • Baked fresh the morning of pickup',
+            metadata: {
+              sku: 'ezekiel-sustinance-full',
+            },
+          },
+          unit_amount: 1800, // $18.00 in cents
+        },
+        quantity: parseInt(ezekiel_full),
+      });
+    }
+
+    // Ezekiel Sustinance Bread - Half ($10)
+    if (parseInt(ezekiel_half) > 0) {
+      lineItems.push({
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Ezekiel Sustinance Bread (Half)',
+            description: '≈500g loaf • Baked fresh the morning of pickup',
+            metadata: {
+              sku: 'ezekiel-sustinance-half',
+            },
+          },
+          unit_amount: 1000, // $10.00 in cents
+        },
+        quantity: parseInt(ezekiel_half),
+      });
+    }
+
     // Create the Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -82,6 +158,12 @@ module.exports = async (req, res) => {
         customer_name: name || '',
         phone: phone || '',
         pickup_date: pickup_date || '',
+        country_full: String(country_full || 0),
+        country_half: String(country_half || 0),
+        heritage_full: String(heritage_full || 0),
+        heritage_half: String(heritage_half || 0),
+        ezekiel_full: String(ezekiel_full || 0),
+        ezekiel_half: String(ezekiel_half || 0),
         notes: notes || '',
         source: 'website-order',
       },
