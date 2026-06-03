@@ -110,16 +110,16 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Ezekiel Sustinance Bread - Full ($18)
+    // Ezekiel High-Protein Bread - Full ($18)
     if (parseInt(ezekiel_full) > 0) {
       lineItems.push({
         price_data: {
           currency: 'usd',
           product_data: {
-            name: 'Ezekiel Sustinance Bread (Full)',
+            name: 'Ezekiel High-Protein Bread (Full)',
             description: '≈1kg loaf • Baked fresh the morning of pickup',
             metadata: {
-              sku: 'ezekiel-sustinance-full',
+              sku: 'ezekiel-high-protein-full',
             },
           },
           unit_amount: 1800, // $18.00 in cents
@@ -128,16 +128,16 @@ module.exports = async (req, res) => {
       });
     }
 
-    // Ezekiel Sustinance Bread - Half ($10)
+    // Ezekiel High-Protein Bread - Half ($10)
     if (parseInt(ezekiel_half) > 0) {
       lineItems.push({
         price_data: {
           currency: 'usd',
           product_data: {
-            name: 'Ezekiel Sustinance Bread (Half)',
+            name: 'Ezekiel High-Protein Bread (Half)',
             description: '≈500g loaf • Baked fresh the morning of pickup',
             metadata: {
-              sku: 'ezekiel-sustinance-half',
+              sku: 'ezekiel-high-protein-half',
             },
           },
           unit_amount: 1000, // $10.00 in cents
