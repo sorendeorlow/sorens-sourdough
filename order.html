@@ -245,6 +245,9 @@
               class="w-full px-4 py-3 rounded-xl bg-beige/60 border border-beige focus:outline-none focus:ring-2 focus:ring-swedish focus:bg-cream transition resize-y"></textarea>
           </label>
 
+          <!-- Loaves-&-fishes "neighbor" handoff from the Table Profile (hidden; populated by handoff JS) -->
+          <input type="hidden" name="slice_for" id="slice-for-hidden" value="" />
+
           <button type="submit" id="submit-btn"
                   class="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-brown text-cream font-medium hover:bg-swedish transition-colors shadow-soft">
             Pay &amp; Reserve with Stripe
@@ -355,10 +358,20 @@
         if (stored && stored.title) {
           recEl.textContent = stored.title;
           const notes = document.querySelector('textarea[name="notes"]');
-          if (notes && !notes.value && stored.why) {
-            const clean = stored.why.replace(/<[^>]+>/g, ' ').trim().slice(0, 240);
-            notes.value = 'From my Table Profile: ' + clean;
+          if (notes && !notes.value) {
+            const parts = [];
+            if (stored.sliceFor) {
+              parts.push('Extra quarter loaf for: ' + stored.sliceFor);
+            }
+            if (stored.why) {
+              const clean = stored.why.replace(/<[^>]+>/g, ' ').trim().slice(0, 240);
+              parts.push('From my Table Profile: ' + clean);
+            }
+            if (parts.length) notes.value = parts.join('\n\n');
           }
+          // Also stash slice_for in its own field so it lands in Stripe metadata cleanly
+          const sliceHidden = document.getElementById('slice-for-hidden');
+          if (sliceHidden && stored.sliceFor) sliceHidden.value = stored.sliceFor;
         } else if (recText) {
           recEl.textContent = recText;
         } else {
@@ -443,6 +456,7 @@
             ezekiel_full: formData.get('ezekiel_full') || 0,
             ezekiel_half: formData.get('ezekiel_half') || 0,
             notes: formData.get('notes') || '',
+            slice_for: formData.get('slice_for') || '',
           };
 
           // 3. Create Stripe Checkout Session

@@ -28,6 +28,7 @@ module.exports = async (req, res) => {
       ezekiel_full = 0,
       ezekiel_half = 0,
       notes = '',
+      slice_for = '',
     } = req.body;
 
     // Basic validation
@@ -165,6 +166,7 @@ module.exports = async (req, res) => {
         ezekiel_full: String(ezekiel_full || 0),
         ezekiel_half: String(ezekiel_half || 0),
         notes: notes || '',
+        slice_for: slice_for || '',
         source: 'website-order',
       },
       // Optional: Add a nice statement descriptor

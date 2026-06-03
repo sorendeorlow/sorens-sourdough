@@ -302,6 +302,20 @@
             </div>
           </div>
 
+          <!-- Loaves & fishes: one for your neighbor -->
+          <div class="bg-cream border border-beige rounded-2xl p-7 md:p-8 mb-8">
+            <div class="gentle-label mb-3" style="color: var(--crust, #B98655);">A small extra</div>
+            <h3 class="font-display text-2xl md:text-3xl leading-tight mb-3">Who would you give a slice to?</h3>
+            <p class="text-[15px] text-brown-soft leading-relaxed mb-5">
+              When your loaf comes off the bake, we&rsquo;ll bake a small extra — a quarter loaf with their name on a tag, at no charge — for you to hand to someone you&rsquo;d want at your table. <span class="italic">Optional, and only if a name comes to mind.</span>
+            </p>
+            <label for="slice-for" class="sr-only">A name or two of the neighbor</label>
+            <input id="slice-for" type="text" maxlength="80"
+                   placeholder="A first name (or two), or leave blank"
+                   class="w-full px-4 py-3 rounded-md border border-brown/15 bg-white text-brown placeholder:text-brown-soft/50 focus:outline-none focus:border-swedish transition-colors text-[15px]" />
+            <p class="text-[11px] text-brown-soft/70 mt-2.5 tracking-wide">No need to share addresses — you&rsquo;ll deliver the extra loaf yourself.</p>
+          </div>
+
           <!-- Hosts upsell (shown conditionally via JS) -->
           <div id="hosts-upsell" class="hidden bg-brown text-cream rounded-2xl p-7 md:p-8 mb-8">
             <div class="gentle-label mb-2 text-crust">Hosting often?</div>
@@ -578,11 +592,16 @@
       params.set('from', 'profile');
       params.set('rec', rec.title);
       
+      // Capture the loaves-&-fishes "neighbor" answer (optional)
+      const sliceInput = document.getElementById('slice-for');
+      const sliceFor = sliceInput && sliceInput.value.trim() ? sliceInput.value.trim() : '';
+
       // Store full context in sessionStorage for the order page to read
       try {
         sessionStorage.setItem('tableProfileRecommendation', JSON.stringify({
           title: rec.title,
           why: rec.why,
+          sliceFor: sliceFor,
           answers: window.profileAnswers || {}
         }));
       } catch(e) {}
