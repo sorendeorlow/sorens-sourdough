@@ -245,8 +245,19 @@
               class="w-full px-4 py-3 rounded-xl bg-beige/60 border border-beige focus:outline-none focus:ring-2 focus:ring-swedish focus:bg-cream transition resize-y"></textarea>
           </label>
 
-          <!-- Loaves-&-fishes "neighbor" handoff from the Table Profile (hidden; populated by handoff JS) -->
-          <input type="hidden" name="slice_for" id="slice-for-hidden" value="" />
+          <!-- Loaves &amp; fishes: who gets the small extra? -->
+          <label class="block" id="slice-for-block">
+            <span class="text-sm font-medium text-brown mb-1.5 block" id="slice-for-label">Who would you give a slice to?</span>
+            <p class="text-xs text-brown-soft leading-relaxed mb-2.5" id="slice-for-helper">
+              With every order we bake a small extra — a quarter loaf with a handwritten tag — for you to hand to someone you&rsquo;d want at your table. Optional.
+            </p>
+            <textarea id="slice-for-input" name="slice_for" rows="2" maxlength="300"
+              placeholder="A first name (or two), or leave blank"
+              class="w-full px-4 py-3 rounded-xl bg-beige/60 border border-beige focus:outline-none focus:ring-2 focus:ring-swedish focus:bg-cream transition resize-y"></textarea>
+            <p class="text-[11px] text-brown-soft/70 mt-1.5 tracking-wide" id="slice-for-fineprint">
+              You&rsquo;ll deliver the extra loaf yourself — we don&rsquo;t need their address.
+            </p>
+          </label>
 
           <button type="submit" id="submit-btn"
                   class="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-brown text-cream font-medium hover:bg-swedish transition-colors shadow-soft">
@@ -358,25 +369,44 @@
         if (stored && stored.title) {
           recEl.textContent = stored.title;
           const notes = document.querySelector('textarea[name="notes"]');
-          if (notes && !notes.value) {
-            const parts = [];
-            if (stored.sliceFor) {
-              parts.push('Extra quarter loaf for: ' + stored.sliceFor);
-            }
-            if (stored.why) {
-              const clean = stored.why.replace(/<[^>]+>/g, ' ').trim().slice(0, 240);
-              parts.push('From my Table Profile: ' + clean);
-            }
-            if (parts.length) notes.value = parts.join('\n\n');
+          if (notes && !notes.value && stored.why) {
+            const clean = stored.why.replace(/<[^>]+>/g, ' ').trim().slice(0, 240);
+            notes.value = 'From my Table Profile: ' + clean;
           }
-          // Also stash slice_for in its own field so it lands in Stripe metadata cleanly
-          const sliceHidden = document.getElementById('slice-for-hidden');
-          if (sliceHidden && stored.sliceFor) sliceHidden.value = stored.sliceFor;
+          // Prefill the visible "slice for" field so Soren sees it whether they edit or not
+          const sliceInput = document.getElementById('slice-for-input');
+          if (sliceInput && stored.sliceFor && !sliceInput.value) {
+            sliceInput.value = stored.sliceFor;
+          }
         } else if (recText) {
           recEl.textContent = recText;
         } else {
           recEl.textContent = 'Thank you — we’ll use what we learned about your table.';
         }
+      }
+    })();
+
+    // Host-bundle aware copy for the "slice for" field. When the customer arrived
+    // via a host bundle (?bundle=sunday|party|holiday), swap the register from
+    // "give a slice to" to "who couldn't be there" and open up the field for
+    // multiple names.
+    (function setupSliceForRegister() {
+      const params = new URLSearchParams(window.location.search);
+      const bundle = params.get('bundle');
+      if (!bundle) return;
+
+      const label = document.getElementById('slice-for-label');
+      const helper = document.getElementById('slice-for-helper');
+      const input = document.getElementById('slice-for-input');
+      const fineprint = document.getElementById('slice-for-fineprint');
+      if (!label || !helper || !input) return;
+
+      label.textContent = "Who couldn’t be there?";
+      helper.textContent = "After your gathering, we’ll bake a small extra — a quarter loaf with a handwritten tag — to take to someone you wished was at the table. One name or several. Optional.";
+      input.setAttribute('placeholder', 'A few first names — one per line, or leave blank');
+      input.setAttribute('rows', '3');
+      if (fineprint) {
+        fineprint.textContent = "You’ll deliver the extra loaf yourself after the gathering — we don’t need their address.";
       }
     })();
 

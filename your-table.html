@@ -481,14 +481,29 @@
       window.currentRecommendation = rec;
 
       // Show hosts upsell if they host frequently
+      const hostsOften = answers.people && answers.people.includes('hosting');
+      const highQuantity = answers.quantity === '6plus' || answers.quantity === '3-5';
       const hostsUpsell = document.getElementById('hosts-upsell');
-      if (hostsUpsell) {
-        const hostsOften = answers.people && answers.people.includes('hosting');
-        const highQuantity = answers.quantity === '6plus' || answers.quantity === '3-5';
-        if (hostsOften || highQuantity) {
-          hostsUpsell.classList.remove('hidden');
+      if (hostsUpsell && (hostsOften || highQuantity)) {
+        hostsUpsell.classList.remove('hidden');
+      }
+
+      // When the table profile reads as a host, swap the slice-for card to the
+      // host register ("Who couldn't be there?" instead of "Who would you give a slice to?")
+      if (hostsOften || answers.quantity === '6plus') {
+        const sliceHeading = document.querySelector('#profile-results h3.font-display');
+        const sliceBlurb = sliceHeading && sliceHeading.nextElementSibling;
+        const sliceInput = document.getElementById('slice-for');
+        if (sliceHeading) sliceHeading.textContent = "Who couldn’t be there?";
+        if (sliceBlurb) {
+          sliceBlurb.innerHTML = "After your gathering, we’ll bake a small extra — a quarter loaf with a handwritten tag — for you to bring to someone you wished was at the table. <span class=\"italic\">One name or several. Optional.</span>";
+        }
+        if (sliceInput) {
+          sliceInput.setAttribute('placeholder', 'A few first names — comma-separated, or leave blank');
+          sliceInput.setAttribute('maxlength', '200');
         }
       }
+
       window.profileAnswers = answers;
 
       // Scroll to results
