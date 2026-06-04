@@ -590,6 +590,15 @@
         why += ' If this is your first time with us, the Country Levain is the best place to begin. It shows you exactly how we bake.';
       }
 
+      // First-time tasting trio — one half loaf of each bread so a new
+      // visitor can taste the whole line at once. Only triggers when
+      // there's no scale signal (hosting / 6+) that requires more bread.
+      if (experience === 'first' && !(people.includes('hosting') || quantity === '6plus')) {
+        title = 'A tasting trio — one half of each bread';
+        why = 'For your first time with us, take half a loaf of each: Country Levain (our signature daily), Heritage Wheat with wildflower raw honey (golden, slightly sweet, the centerpiece), and the Ezekiel High-Protein loaf (Ezekiel 4:9 — hearty and ancient). Three halves, one table, one weekend to find the loaf yours comes back to.';
+        cart = { country_half: 1, heritage_half: 1, ezekiel_half: 1 };
+      }
+
       // Heritage Wheat & Wildflower Raw Honey for celebratory tables —
       // the centerpiece + the staple. Don't override the hosting/6+
       // branch (a celebration AT scale still wants three Country loaves).
