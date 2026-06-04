@@ -580,7 +580,7 @@
         title = 'One full Country Levain';
         why = 'A full loaf stays fresh and special for a few days. Many of our neighbors in Aviara and La Costa prefer this rhythm — enough for real bread at dinner without waste.';
         cart = { country_full: 1 };
-      } else if (need === 'guests' || need === 'celebrate' || need === 'community' || people.includes('hosting')) {
+      } else if (need === 'guests' || need === 'community' || people.includes('hosting')) {
         title = 'Two full Country Levains';
         why = 'For weeks when the table is doing more work — guests, Sunday dinner, a birthday — two full loaves let you tear one and still have a second ready.';
         cart = { country_full: 2 };
@@ -588,6 +588,15 @@
 
       if (experience === 'first') {
         why += ' If this is your first time with us, the Country Levain is the best place to begin. It shows you exactly how we bake.';
+      }
+
+      // Heritage Wheat & Wildflower Raw Honey for celebratory tables —
+      // the centerpiece + the staple. Don't override the hosting/6+
+      // branch (a celebration AT scale still wants three Country loaves).
+      if (need === 'celebrate' && !(people.includes('hosting') || quantity === '6plus')) {
+        title = 'One full Heritage Wheat &amp; Wildflower Honey + One full Country Levain';
+        why = 'Heritage Wheat with wildflower raw honey is the loaf that turns into a centerpiece — golden, slightly sweet, the kind of slice that quiets a room. Paired with a full Country Levain, you have the special and the staple at the same table — one for tearing into stories, one for the rest of dinner.';
+        cart = { heritage_full: 1, country_full: 1 };
       }
 
       // Ezekiel 4:9 reference for nourishing preference (High-Protein Bread)
