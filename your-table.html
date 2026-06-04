@@ -569,17 +569,21 @@
 
       let title = 'Two half loaves of Country Levain';
       let why = 'Our signature daily loaf is versatile enough for both everyday meals and when someone drops by. The open crumb and caramelized crust hold up beautifully to butter, cheese, or a good soup.';
+      let cart = { country_half: 2 };
 
       // Logic branches
       if (quantity === '6plus' || people.includes('hosting')) {
         title = 'Three full Country Levains';
         why = 'When your table regularly expands, one loaf is rarely enough. Three full loaves give you the capacity to host without stress and still have a little left for the next day. We’ll bake them fresh the morning you pick up.';
+        cart = { country_full: 3 };
       } else if (quantity === '1-2' || people.includes('solo') || people.includes('couple')) {
-        title = 'One full or two half loaves of Country Levain';
-        why = 'A half loaf stays fresh and special for a few days. Many of our neighbors in Aviara and La Costa prefer this rhythm — enough for real bread at dinner without waste.';
+        title = 'One full Country Levain';
+        why = 'A full loaf stays fresh and special for a few days. Many of our neighbors in Aviara and La Costa prefer this rhythm — enough for real bread at dinner without waste.';
+        cart = { country_full: 1 };
       } else if (need === 'guests' || need === 'celebrate' || need === 'community' || people.includes('hosting')) {
         title = 'Two full Country Levains';
         why = 'For weeks when the table is doing more work — guests, Sunday dinner, a birthday — two full loaves let you tear one and still have a second ready.';
+        cart = { country_full: 2 };
       }
 
       if (experience === 'first') {
@@ -590,12 +594,13 @@
       if (need === 'nourish') {
         title = 'Two full Ezekiel High-Protein Breads';
         why = 'A hearty ancient-grain loaf inspired by Ezekiel 4:9, made with wheat, barley, beans, lentils, millet, spelt, wildflower raw honey, seeds, nuts, and raisins. Perfect for those seeking deeper nourishment.';
+        cart = { ezekiel_full: 2 };
       }
 
       // Add a very light biblical/hospitality echo (inviting, not preachy)
       why += ' It will leave our kitchen with a small handwritten tag and a simple blessing card — a line from an old story about bread and welcome.';
 
-      return { title, why };
+      return { title, why, cart };
     }
 
     function reserveRecommended() {
@@ -616,6 +621,7 @@
         sessionStorage.setItem('tableProfileRecommendation', JSON.stringify({
           title: rec.title,
           why: rec.why,
+          cart: rec.cart || {},
           sliceFor: sliceFor,
           answers: window.profileAnswers || {}
         }));

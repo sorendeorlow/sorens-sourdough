@@ -378,6 +378,31 @@
           if (sliceInput && stored.sliceFor && !sliceInput.value) {
             sliceInput.value = stored.sliceFor;
           }
+          // Pre-fill the shopping cart from the recommendation so customers don't
+          // have to retype quantities. Only fills empty inputs (won't overwrite
+          // anything the customer already typed). Dispatches "input" so the live
+          // total in js/main.js recalculates.
+          if (stored.cart && typeof stored.cart === 'object') {
+            Object.entries(stored.cart).forEach(([sku, qty]) => {
+              const input = document.querySelector(`input[name="${sku}"]`);
+              const q = Math.max(0, parseInt(qty, 10) || 0);
+              if (input && q > 0 && (parseInt(input.value, 10) || 0) === 0) {
+                input.value = q;
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+              }
+            });
+            // Tiny confirmation line under the banner so the customer notices
+            // their cart was filled and knows it's adjustable.
+            const banner = document.getElementById('profile-handoff');
+            if (banner && !document.getElementById('handoff-prefilled-note')) {
+              const note = document.createElement('p');
+              note.id = 'handoff-prefilled-note';
+              note.className = 'text-xs text-brown-soft mt-1';
+              note.textContent = 'Your loaves are pre-filled below — adjust if you’d like.';
+              const recEl = document.getElementById('handoff-recommendation');
+              if (recEl && recEl.parentNode) recEl.parentNode.appendChild(note);
+            }
+          }
         } else if (recText) {
           recEl.textContent = recText;
         } else {
@@ -413,6 +438,16 @@
     function clearProfileHandoff() {
       const banner = document.getElementById('profile-handoff');
       if (banner) banner.style.display = 'none';
+      // Zero out the cart so "Not this time" feels like a fresh start
+      document.querySelectorAll('#order-form .qty').forEach((input) => {
+        input.value = 0;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      // Clear the prefilled slice-for and notes too — customer is opting out of the profile entirely
+      const sliceInput = document.getElementById('slice-for-input');
+      if (sliceInput) sliceInput.value = '';
+      const notes = document.querySelector('textarea[name="notes"]');
+      if (notes && notes.value.startsWith('From my Table Profile:')) notes.value = '';
       try { sessionStorage.removeItem('tableProfileRecommendation'); } catch(e) {}
       const url = new URL(window.location);
       url.searchParams.delete('from');
