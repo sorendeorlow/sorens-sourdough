@@ -172,27 +172,34 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .hero-badge > * { position: relative; z-index: 2; }
 
-.hero-badge .badge-arrow {
-  animation: heroBadgePulse 2.6s ease-out 3s infinite;
-  transition: transform .4s cubic-bezier(.2,.8,.2,1), background-color .25s ease;
+/* Bread illustration breathes gently, like dough proofing — not a heartbeat. */
+.hero-badge .badge-bread {
+  animation: breadBreathing 5.2s ease-in-out 3s infinite;
+  transition: transform .5s cubic-bezier(.2,.8,.2,1);
+  transform-origin: center;
 }
-.hero-badge:hover .badge-arrow {
-  transform: translateX(4px);
+@keyframes breadBreathing {
+  0%, 100% { transform: scale(1) rotate(0); }
+  50%      { transform: scale(1.045) rotate(-1.2deg); }
+}
+.hero-badge:hover .badge-bread {
+  transform: scale(1.08) rotate(-2.5deg);
   animation-play-state: paused;
 }
-.hero-badge:hover .badge-arrow svg {
-  animation: arrowNudge .55s ease-in-out infinite alternate;
+.hero-badge .badge-chevron {
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .25s ease;
+  opacity: .6;
 }
-@keyframes arrowNudge {
-  from { transform: translateX(0); }
-  to   { transform: translateX(2px); }
+.hero-badge:hover .badge-chevron {
+  transform: translateX(4px);
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-badge,
-  .hero-badge .badge-arrow,
+  .hero-badge .badge-bread,
   .hero-badge::before,
-  .hero-badge:hover .badge-arrow svg {
+  .hero-badge .badge-chevron {
     animation: none !important;
   }
   .hero-badge { opacity: 1; transform: none; }
