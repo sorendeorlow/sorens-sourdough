@@ -206,6 +206,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* ===========================================
+   "Set the table" CTA — bread watermark
+   A soft tan loaf sits behind the text, big enough
+   to read as bread but light enough to stay backdrop.
+   =========================================== */
+.table-cta {
+  position: relative;
+  overflow: hidden;
+}
+.table-cta::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(260px, 78vw, 400px);
+  aspect-ratio: 280 / 386;
+  background-image: url(../images/bread-drawing-tan.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: .5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===========================================
    Review form — star rating
    =========================================== */
 .review-star {
