@@ -1,0 +1,12 @@
+{
+  "name": "sorens-sourdough",
+  "version": "1.0.0",
+  "description": "Communion Breads — small static site plus a Stripe Checkout serverless function on Vercel.",
+  "private": true,
+  "engines": {
+    "node": "20.x"
+  },
+  "dependencies": {
+    "stripe": "^17.0.0"
+  }
+}
